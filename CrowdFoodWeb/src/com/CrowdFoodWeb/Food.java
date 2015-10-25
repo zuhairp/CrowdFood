@@ -18,7 +18,9 @@ public class Food {
 	
 	
 	///Constructor
-	public Food(){
+	public Food(String name){
+		this.name = name;
+		
 		
 	}
 	

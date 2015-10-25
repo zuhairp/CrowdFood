@@ -7,8 +7,8 @@ public class User {
 	private String id;
 	
 	////Constructor
-	public User(){
-		
+	public User(String id){ //Pass in ID from Facebook API - Should be a numeric string
+		this.id = id;
 	}
 	
 	
