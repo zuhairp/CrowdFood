@@ -1,5 +1,52 @@
 package com.CrowdFoodWeb;
 
 public class User {
-
+	private Double Rating;
+	private String userName;
+	private String paymentOption;
+	private String id;
+	
+	////Constructor
+	public User(){
+		
+	}
+	
+	
+	//////getters and Setters
+	public Double getRating() {
+		return Rating;
+	}
+	public void setRating(Double rating) {
+		Rating = rating;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getPaymentOption() {
+		return paymentOption;
+	}
+	public void setPaymentOption(String paymentOption) {
+		this.paymentOption = paymentOption;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	/////Other functions
+	public void initiateTransaction(){
+		
+	}
+	public void terminateTransaction(){
+		
+	}
+	
+	
+	
+	
 }
