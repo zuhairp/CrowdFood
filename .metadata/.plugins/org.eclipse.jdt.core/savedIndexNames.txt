@@ -29,7 +29,6 @@ INDEX VERSION 1.127+/Users/shark89fish/projects_461L/CrowdFood/.metadata/.plugin
 2171826273.index
 2947322911.index
 359519080.index
-970773367.index
 1831474627.index
 3085072714.index
 168473447.index
