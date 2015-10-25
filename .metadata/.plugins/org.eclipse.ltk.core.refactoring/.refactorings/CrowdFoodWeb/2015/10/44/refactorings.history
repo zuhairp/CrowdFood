@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.CrowdFoodWeb.Use&apos; to &apos;User&apos;&#x0A;- Original project: &apos;CrowdFoodWeb&apos;&#x0A;- Original element: &apos;com.CrowdFoodWeb.Use&apos;&#x0A;- Renamed element: &apos;com.CrowdFoodWeb.User&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Use&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;com.CrowdFoodWeb{Use.java[Use" matchStrategy="1" name="User" qualified="false" references="true" similarDeclarations="false" stamp="1445794753210" textual="false" version="1.0"/>
+</session>
