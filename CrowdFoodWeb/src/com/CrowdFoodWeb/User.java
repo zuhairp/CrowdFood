@@ -15,7 +15,7 @@ public class User {
 	private String[] friendIDs;
 	private String token;
 	
-	////Constructor
+	////Constructor 2 different?
 	
 	
 	public User(String id){
