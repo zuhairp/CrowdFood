@@ -1,14 +1,32 @@
 package com.CrowdFoodWeb;
 
+//import com.google.appengine.api.users.User;
+
+import com.googlecode.objectify.annotation.Entity;
+
+import com.googlecode.objectify.annotation.Id;
+
+@Entity
 public class User {
 	private Double Rating;
 	private String userName;
 	private String paymentOption;
-	private String id;
+	@Id private String id;
+	private String[] friendIDs;
+	private String token;
 	
 	////Constructor
-	public User(){
+	
+	
+	public User(String id){
+		this.id = id;
 		
+	}
+	
+	public User(String id, String name, String token){ //Pass in ID from Facebook API - Should be a numeric string
+		this.id = id;
+		this.userName = name;
+		this.token = token;
 	}
 	
 	
