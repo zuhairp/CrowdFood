@@ -57,7 +57,7 @@ export default class FoodOrderForm extends React.Component {
 					<p style={{paddingLeft:"5px"}}>at ${price.toFixed(2)} each</p>
 				</div>
 				<div style={totalPriceContainerStyle}>
-					<Input type="text" addonBefore="$" value={this.state.value.toFixed(2)} readonly/>
+					<Input type="text" addonBefore="$" value={this.state.value.toFixed(2)} readonly readOnly/>
 					<Button bsStyle="success" bsSize="medium" style={{marginLeft:"10px"}}>Request</Button>
 				</div>
 			</div>

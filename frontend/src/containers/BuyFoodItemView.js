@@ -17,7 +17,7 @@ const actionCreators = {
 // the component can be tested w/ and w/o being connected.
 // See: http://rackt.github.io/redux/docs/recipes/WritingTests.html
 const mapStateToProps = (state) => ({
-  foods: state.foods,
+  food: state.foods[state.router.params.foodId],
   routerState: state.router,
 });
 const mapDispatchToProps = (dispatch) => ({
@@ -33,6 +33,7 @@ export class BuyFoodItemView extends React.Component {
   }
 
   render () {
+    const { name, description, owner, post_date, expiration_date, quantity, price } = this.props.food;
     return (
       <div className='container text-center'>
         <Grid>
@@ -46,18 +47,18 @@ export class BuyFoodItemView extends React.Component {
           		</Row>
           	</Col>
           	<Col xs={6}>
-          		<p> Tacos </p>
+          		<p> {name} </p>
           		<p>
-          			Made too many tacos for lunch. Its just meat and a taco shell, bring your own toppings
+                  { description }
           		</p>
           		<p>
-          			Prepared by Chef Alex Jones (4 stars)
+          			Prepared by Chef { owner } (4 stars)
           		</p>
           		<p>
-          			Post Date: Monday, September 28
+          			Post Date: { post_date }
           		</p>
           		<p>
-          			Expires: Thursday, October 1
+          			Expires: { expiration_date }
           		</p>
           	</Col>
           </Row>

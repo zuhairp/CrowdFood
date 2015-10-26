@@ -7,6 +7,6 @@ import BuyFoodItemView from 'containers/BuyFoodItemView';
 export default (
   <Route path='/' component={CoreLayout}>
     <IndexRoute component={HomeView} />
-    <Route name='buy-food' path='/food' component={BuyFoodItemView} />
+    <Route name='buy-food' path='/food/:foodId' component={BuyFoodItemView} />
   </Route>
 );

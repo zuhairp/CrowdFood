@@ -47,8 +47,8 @@ export class HomeView extends React.Component {
   renderNearbyFoods() {
     const { nearby, foods } = this.props; 
     return nearby.foods.map((food_id, index) => {
-      const { name, distance } = foods[food_id];
-      return <FoodInfoCard name={name} distance={distance} />
+      const food = foods[food_id];
+      return <FoodInfoCard {...food} key={food_id}/>
     });
   }
 
