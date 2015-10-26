@@ -4,6 +4,8 @@ import { connect }            from 'react-redux';
 
 import { Grid, Row, Col, Input, Button }     from 'react-bootstrap';
 
+import FoodOrderForm from 'components/FoodOrderForm';
+
 // Normally you'd import your action creators, but I don't want to create
 // a file that you're just going to delete anyways!
 const actionCreators = {
@@ -41,24 +43,7 @@ export class BuyFoodItemView extends React.Component {
           			<Col xs={12}><img src="http://placehold.it/300x300" /></Col>
           		</Row>
           		<Row>
-          			<Col xs={6}>
-	          			<Input type="select" placeholder="1">
-	          				<option value="1">1</option>
-	          				<option value="2">2</option>
-	          				<option value="3">3</option>
-	          			</Input>
-          			</Col>
-          			<Col xs={6}>
-          			at $2.00 each
-          			</Col>
-          		</Row>
-          		<Row>
-          			<Col xs={6}>
-          				<Input type="text" addonBefore="$" value="2.00"/>
-          			</Col>
-          			<Col xs={6}>
-          				<Button bsStyle="success">Request</Button>
-          			</Col>
+                <FoodOrderForm quantity={3} price={2} />
           		</Row>
           	</Col>
           	<Col xs={6}>
@@ -67,7 +52,7 @@ export class BuyFoodItemView extends React.Component {
           			Made too many tacos for lunch. Its just meat and a taco shell, bring your own toppings
           		</p>
           		<p>
-          			Prepared by Chef Alex Smith (4 stars)
+          			Prepared by Chef Alex Jones (4 stars)
           		</p>
           		<p>
           			Post Date: Monday, September 28

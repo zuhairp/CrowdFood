@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-import counter from './counter';
+
+import { foods, nearbyFoods } from './food';
 
 export default combineReducers({
-  counter
+  foods,
+  nearbyFoods,
 });

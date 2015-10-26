@@ -2,6 +2,8 @@ import React                  from 'react';
 import { bindActionCreators } from 'redux';
 import { connect }            from 'react-redux';
 
+import { getNearbyFoods }     from 'actions/nearby_foods';
+
 import { Grid, Row, Col }     from 'react-bootstrap';
 
 import SearchBar              from 'components/SearchBar';
@@ -10,7 +12,7 @@ import FoodInfoCard           from 'components/FoodInfoCard';
 // Normally you'd import your action creators, but I don't want to create
 // a file that you're just going to delete anyways!
 const actionCreators = {
-  increment : () => ({ type : 'COUNTER_INCREMENT' })
+  getNearbyFoods,
 };
 
 // We define mapStateToProps and mapDispatchToProps where we'd normally use
@@ -19,7 +21,8 @@ const actionCreators = {
 // the component can be tested w/ and w/o being connected.
 // See: http://rackt.github.io/redux/docs/recipes/WritingTests.html
 const mapStateToProps = (state) => ({
-  counter : state.counter
+  nearby: state.nearbyFoods,
+  foods: state.foods,
 });
 const mapDispatchToProps = (dispatch) => ({
   actions : bindActionCreators(actionCreators, dispatch)
@@ -27,14 +30,28 @@ const mapDispatchToProps = (dispatch) => ({
 export class HomeView extends React.Component {
   static propTypes = {
     actions  : React.PropTypes.object,
-    counter  : React.PropTypes.number
   }
 
   constructor () {
     super();
   }
 
-  render () {
+  componentDidMount() {
+    const latitude = 100;
+    const longitude = 100;
+    const { getNearbyFoods } = this.props.actions;
+    getNearbyFoods({latitude, longitude});
+  }
+
+  renderNearbyFoods() {
+    const { nearby, foods } = this.props; 
+    return nearby.foods.map((food_id, index) => {
+      const { name, distance } = foods[food_id];
+      return <FoodInfoCard name={name} distance={distance} />
+    });
+  }
+
+  render() {
     return (
       <div className='container text-center'>
         <Grid>
@@ -42,24 +59,13 @@ export class HomeView extends React.Component {
             <Col md={4} mdOffset={4}><h2>CrowdFood</h2></Col>
           </Row>
           <Row>
-            <Col md={6} mdOffset={3}><SearchBar onSearch={this.props.actions.increment} /></Col>
+            <Col md={6} mdOffset={3}><SearchBar /></Col>
           </Row>
           <Row>
             <Col md={4} mdOffset={4}><h4>What's cooking nearby</h4></Col>
           </Row>
           <Row>
-              <FoodInfoCard name="Taco" distance="0.1" />
-              <FoodInfoCard name="Taco" distance="0.1" />
-              <FoodInfoCard name="Taco" distance="0.1" />
-              <FoodInfoCard name="Taco" distance="0.1" />
-              <FoodInfoCard name="Taco" distance="0.1" />
-              <FoodInfoCard name="Taco" distance="0.1" />
-              <FoodInfoCard name="Taco" distance="0.1" />
-              <FoodInfoCard name="Taco" distance="0.1" />
-              <FoodInfoCard name="Taco" distance="0.1" />
-              <FoodInfoCard name="Taco" distance="0.1" />
-              <FoodInfoCard name="Taco" distance="0.1" />
-              <FoodInfoCard name="Taco" distance="0.1" />
+            { this.renderNearbyFoods() }
           </Row>
         </Grid>
       </div>
