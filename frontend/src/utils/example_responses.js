@@ -1,3 +1,5 @@
+export const EXAMPLE_RESPONSE_TIME_MS = 2000;
+
 export const EXAMPLE_FOODS = {
 	10: {
 		id: 10,

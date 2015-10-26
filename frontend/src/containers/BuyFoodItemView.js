@@ -6,14 +6,23 @@ import { Grid, Row, Col, Input, Button }     from 'react-bootstrap';
 
 import FoodOrderForm from 'components/FoodOrderForm';
 
+import { getFoodIfNecessary } from 'actions/food';
+
 const actionCreators = {
+  getFoodIfNecessary,
 };
 
-const mapStateToProps = (state) => ({
-  food: state.foods[state.router.params.foodId],
-  routerState: state.router,
-  owner: state.users[state.foods[state.router.params.foodId].owner],
-});
+const mapStateToProps = (state) => {
+  let owner = undefined;
+  if(state.foods[state.router.params.foodId] !== undefined){
+    owner = state.users[state.foods[state.router.params.foodId].owner];
+  }
+  return {
+    food: state.foods[state.router.params.foodId],
+    routerState: state.router,
+    owner: owner,
+  }
+};
 const mapDispatchToProps = (dispatch) => ({
   actions : bindActionCreators(actionCreators, dispatch)
 });
@@ -27,9 +36,18 @@ export class BuyFoodItemView extends React.Component {
     super();
   }
 
-  render () {
-    console.log(this.props);
-    const { name, description, post_date, expiration_date, quantity, price } = this.props.food;
+  componentDidMount() {
+    const { getFoodIfNecessary } = this.props.actions;
+    getFoodIfNecessary(this.props.routerState.params.foodId);
+  }
+
+  render() {
+    if(this.props.food === undefined || this.props.owner === undefined){
+      return (
+        <p> Loading... </p>
+      );
+    }
+    const { name, description, post_date, expiration_date, quantity, price, owner } = this.props.food;
     const { name : seller, rating } = this.props.owner;
     return (
       <div className='container text-center'>

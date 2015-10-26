@@ -1,4 +1,4 @@
-import { EXAMPLE_NEARBY_FOODS_RESPONSE } from 'utils/example_responses.js';
+import { EXAMPLE_NEARBY_FOODS_RESPONSE, EXAMPLE_RESPONSE_TIME_MS } from 'utils/example_responses.js';
 
 export const NEARBY_FOODS_REQUEST = 'NEARBY_FOODS_REQUEST';
 export const NEARBY_FOODS_RECEIVE = 'NEARBY_FOODS_RECEIVE';
@@ -30,9 +30,8 @@ export function getNearbyFoods(location){
 		const alreadyFetching = state.nearbyFoods.fetching;
 		if(!alreadyFetching){
 			dispatch(requestNearbyFoods());	
-
 			// Simulate a network request
-			return new Promise((resolve, reject) => setTimeout(() => resolve(EXAMPLE_NEARBY_FOODS_RESPONSE), 750))
+			return new Promise((resolve, reject) => setTimeout(() => resolve(EXAMPLE_NEARBY_FOODS_RESPONSE), EXAMPLE_RESPONSE_TIME_MS))
 			.then(req => req.foods)
 			.then(json => dispatch(receiveNearbyFoods(json)))
 			.catch(error => dispatch(nearbyFoodsError(error)));
