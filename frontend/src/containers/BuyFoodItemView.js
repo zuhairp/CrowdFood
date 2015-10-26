@@ -9,7 +9,6 @@ import FoodOrderForm from 'components/FoodOrderForm';
 // Normally you'd import your action creators, but I don't want to create
 // a file that you're just going to delete anyways!
 const actionCreators = {
-  increment : () => ({ type : 'COUNTER_INCREMENT' })
 };
 
 // We define mapStateToProps and mapDispatchToProps where we'd normally use
@@ -18,7 +17,8 @@ const actionCreators = {
 // the component can be tested w/ and w/o being connected.
 // See: http://rackt.github.io/redux/docs/recipes/WritingTests.html
 const mapStateToProps = (state) => ({
-  counter : state.counter
+  foods: state.foods,
+  routerState: state.router,
 });
 const mapDispatchToProps = (dispatch) => ({
   actions : bindActionCreators(actionCreators, dispatch)
@@ -26,7 +26,6 @@ const mapDispatchToProps = (dispatch) => ({
 export class BuyFoodItemView extends React.Component {
   static propTypes = {
     actions  : React.PropTypes.object,
-    counter  : React.PropTypes.number
   }
 
   constructor () {

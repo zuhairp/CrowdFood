@@ -23,6 +23,7 @@ const actionCreators = {
 const mapStateToProps = (state) => ({
   nearby: state.nearbyFoods,
   foods: state.foods,
+  routerState: state.router,
 });
 const mapDispatchToProps = (dispatch) => ({
   actions : bindActionCreators(actionCreators, dispatch)
