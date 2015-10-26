@@ -6,23 +6,18 @@ import { Grid, Row, Col, Input, Button }     from 'react-bootstrap';
 
 import FoodOrderForm from 'components/FoodOrderForm';
 
-// Normally you'd import your action creators, but I don't want to create
-// a file that you're just going to delete anyways!
 const actionCreators = {
 };
 
-// We define mapStateToProps and mapDispatchToProps where we'd normally use
-// the @connect decorator so the data requirements are clear upfront, but then
-// export the decorated component after the main class definition so
-// the component can be tested w/ and w/o being connected.
-// See: http://rackt.github.io/redux/docs/recipes/WritingTests.html
 const mapStateToProps = (state) => ({
   food: state.foods[state.router.params.foodId],
   routerState: state.router,
+  owner: state.users[state.foods[state.router.params.foodId].owner],
 });
 const mapDispatchToProps = (dispatch) => ({
   actions : bindActionCreators(actionCreators, dispatch)
 });
+
 export class BuyFoodItemView extends React.Component {
   static propTypes = {
     actions  : React.PropTypes.object,
@@ -33,7 +28,9 @@ export class BuyFoodItemView extends React.Component {
   }
 
   render () {
-    const { name, description, owner, post_date, expiration_date, quantity, price } = this.props.food;
+    console.log(this.props);
+    const { name, description, post_date, expiration_date, quantity, price } = this.props.food;
+    const { name : seller, rating } = this.props.owner;
     return (
       <div className='container text-center'>
         <Grid>
@@ -43,7 +40,7 @@ export class BuyFoodItemView extends React.Component {
           			<Col xs={12}><img src="http://placehold.it/300x300" /></Col>
           		</Row>
           		<Row>
-                <FoodOrderForm quantity={3} price={2} />
+                <FoodOrderForm quantity={quantity} price={price} />
           		</Row>
           	</Col>
           	<Col xs={6}>
@@ -52,7 +49,7 @@ export class BuyFoodItemView extends React.Component {
                   { description }
           		</p>
           		<p>
-          			Prepared by Chef { owner } (4 stars)
+          			Prepared by Chef { seller } ({ rating } stars)
           		</p>
           		<p>
           			Post Date: { post_date }
