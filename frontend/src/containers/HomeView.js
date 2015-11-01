@@ -40,15 +40,15 @@ export class HomeView extends React.Component {
   componentDidMount() {
     const latitude = 100;
     const longitude = 100;
-    const { getNearbyFoods } = this.props.actions;
+    const { getNearbyFoods } = this.props.actions; // eslint-disable-line no-shadow
     getNearbyFoods({latitude, longitude});
   }
 
   renderNearbyFoods() {
-    const { nearby, foods } = this.props; 
-    return nearby.foods.map((food_id, index) => {
-      const food = foods[food_id];
-      return <FoodInfoCard {...food} key={food_id}/>
+    const { nearby, foods } = this.props;
+    return nearby.foods.map((foodId, index) => {
+      const food = foods[foodId];
+      return <FoodInfoCard {...food} key={foodId}/>;
     });
   }
 

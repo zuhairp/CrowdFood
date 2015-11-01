@@ -2,7 +2,7 @@ import React                  from 'react';
 import { bindActionCreators } from 'redux';
 import { connect }            from 'react-redux';
 
-import { Grid, Row, Col, Input, Button }     from 'react-bootstrap';
+import { Grid, Row, Col }     from 'react-bootstrap';
 
 import FoodOrderForm from 'components/FoodOrderForm';
 
@@ -14,14 +14,14 @@ const actionCreators = {
 
 const mapStateToProps = (state) => {
   let owner = undefined;
-  if(state.foods[state.router.params.foodId] !== undefined){
+  if (state.foods[state.router.params.foodId] !== undefined) {
     owner = state.users[state.foods[state.router.params.foodId].owner];
   }
   return {
     food: state.foods[state.router.params.foodId],
     routerState: state.router,
     owner: owner,
-  }
+  };
 };
 const mapDispatchToProps = (dispatch) => ({
   actions : bindActionCreators(actionCreators, dispatch)
@@ -37,17 +37,17 @@ export class BuyFoodItemView extends React.Component {
   }
 
   componentDidMount() {
-    const { getFoodIfNecessary } = this.props.actions;
+    const { getFoodIfNecessary } = this.props.actions; // eslint-disable-line no-shadow
     getFoodIfNecessary(this.props.routerState.params.foodId);
   }
 
   render() {
-    if(this.props.food === undefined || this.props.owner === undefined){
+    if (this.props.food === undefined || this.props.owner === undefined) {
       return (
         <p> Loading... </p>
       );
     }
-    const { name, description, post_date, expiration_date, quantity, price, owner } = this.props.food;
+    const { name, description, post_date : postDate, expiration_date : expirationDate, quantity, price } = this.props.food;
     const { name : seller, rating } = this.props.owner;
     return (
       <div className='container text-center'>
@@ -62,7 +62,7 @@ export class BuyFoodItemView extends React.Component {
           		</Row>
           	</Col>
           	<Col xs={6}>
-          		<p> {name} </p>
+          		<p style={{fontWeight:'bold'}}> {name} </p>
           		<p>
                   { description }
           		</p>
@@ -70,10 +70,10 @@ export class BuyFoodItemView extends React.Component {
           			Prepared by Chef { seller } ({ rating } stars)
           		</p>
           		<p>
-          			Post Date: { post_date }
+          			Post Date: { postDate }
           		</p>
           		<p>
-          			Expires: { expiration_date }
+          			Expires: { expirationDate }
           		</p>
           	</Col>
           </Row>
