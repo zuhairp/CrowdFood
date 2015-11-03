@@ -2,36 +2,53 @@ import React                  from 'react';
 import { bindActionCreators } from 'redux';
 import { connect }            from 'react-redux';
 
-import { Grid, Row, Col, Input, Button }     from 'react-bootstrap';
+import { Grid, Row, Col }     from 'react-bootstrap';
 
-// Normally you'd import your action creators, but I don't want to create
-// a file that you're just going to delete anyways!
+import FoodOrderForm from 'components/FoodOrderForm';
+
+import { getFoodIfNecessary } from 'actions/food';
+
 const actionCreators = {
-  increment : () => ({ type : 'COUNTER_INCREMENT' })
+  getFoodIfNecessary,
 };
 
-// We define mapStateToProps and mapDispatchToProps where we'd normally use
-// the @connect decorator so the data requirements are clear upfront, but then
-// export the decorated component after the main class definition so
-// the component can be tested w/ and w/o being connected.
-// See: http://rackt.github.io/redux/docs/recipes/WritingTests.html
-const mapStateToProps = (state) => ({
-  counter : state.counter
-});
+const mapStateToProps = (state) => {
+  let owner = undefined;
+  if (state.foods[state.router.params.foodId] !== undefined) {
+    owner = state.users[state.foods[state.router.params.foodId].owner];
+  }
+  return {
+    food: state.foods[state.router.params.foodId],
+    routerState: state.router,
+    owner: owner,
+  };
+};
 const mapDispatchToProps = (dispatch) => ({
   actions : bindActionCreators(actionCreators, dispatch)
 });
+
 export class BuyFoodItemView extends React.Component {
   static propTypes = {
     actions  : React.PropTypes.object,
-    counter  : React.PropTypes.number
   }
 
   constructor () {
     super();
   }
 
-  render () {
+  componentDidMount() {
+    const { getFoodIfNecessary } = this.props.actions; // eslint-disable-line no-shadow
+    getFoodIfNecessary(this.props.routerState.params.foodId);
+  }
+
+  render() {
+    if (this.props.food === undefined || this.props.owner === undefined) {
+      return (
+        <p> Loading... </p>
+      );
+    }
+    const { name, description, post_date : postDate, expiration_date : expirationDate, quantity, price } = this.props.food;
+    const { name : seller, rating } = this.props.owner;
     return (
       <div className='container text-center'>
         <Grid>
@@ -41,39 +58,22 @@ export class BuyFoodItemView extends React.Component {
           			<Col xs={12}><img src="http://placehold.it/300x300" /></Col>
           		</Row>
           		<Row>
-          			<Col xs={6}>
-	          			<Input type="select" placeholder="1">
-	          				<option value="1">1</option>
-	          				<option value="2">2</option>
-	          				<option value="3">3</option>
-	          			</Input>
-          			</Col>
-          			<Col xs={6}>
-          			at $2.00 each
-          			</Col>
-          		</Row>
-          		<Row>
-          			<Col xs={6}>
-          				<Input type="text" addonBefore="$" value="2.00"/>
-          			</Col>
-          			<Col xs={6}>
-          				<Button bsStyle="success">Request</Button>
-          			</Col>
+                <FoodOrderForm quantity={quantity} price={price} />
           		</Row>
           	</Col>
           	<Col xs={6}>
-          		<p> Tacos </p>
+          		<p style={{fontWeight:'bold'}}> {name} </p>
           		<p>
-          			Made too many tacos for lunch. Its just meat and a taco shell, bring your own toppings
+                  { description }
           		</p>
           		<p>
-          			Prepared by Chef Alex Smith (4 stars)
+          			Prepared by Chef { seller } ({ rating } stars)
           		</p>
           		<p>
-          			Post Date: Monday, September 28
+          			Post Date: { postDate }
           		</p>
           		<p>
-          			Expires: Thursday, October 1
+          			Expires: { expirationDate }
           		</p>
           	</Col>
           </Row>

@@ -1,6 +1,14 @@
 import { combineReducers } from 'redux';
-import counter from './counter';
+
+import { routerStateReducer } from 'redux-router';
+
+import { foods, nearbyFoods } from './food';
+
+import { users } from './users';
 
 export default combineReducers({
-  counter
+  foods,
+  nearbyFoods,
+  users,
+  router: routerStateReducer,
 });
