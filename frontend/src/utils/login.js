@@ -31,8 +31,6 @@ window.onload = function() {
 
 // Call this function when the 'login' button is clicked from dropdown menu
 function login() {
-    FB.login(function(response){
-        
         FB.login(function(response) {
            if (response.authResponse) 
            {
@@ -43,8 +41,6 @@ function login() {
              console.log('Authorization failed.');
             }
          },{scope: 'email'}); 
-
-    });
 }
 
 // This function retrieves the user's info when they log in
@@ -57,7 +53,7 @@ function getUserInfo() {
         //response.id         - id
         //response.email      - User email
         
-        showInfo(response.name, response.link, response.username, response.id, response.email, getPhoto);
+        showInfo(response.name, response.link, response.username, response.id, response.email, getPhoto());
 
     });
 }

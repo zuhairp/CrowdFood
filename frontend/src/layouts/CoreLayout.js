@@ -1,17 +1,36 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect }            from 'react-redux';
+
+import { loginFacebook } from 'actions/facebook';
+
 import 'styles/core.scss';
 
 import { Navbar, NavBrand, Nav, NavItem, NavDropdown, MenuItem, CollapsibleNav } from 'react-bootstrap';
 
 import { Link } from 'react-router';
 
-export default class CoreLayout extends React.Component {
+const actionCreators = {
+  loginToFacebook: loginFacebook,
+};
+const mapStateToProps = (state) => ({
+  counter : state.counter
+});
+const mapDispatchToProps = (dispatch) => ({
+  actions : bindActionCreators(actionCreators, dispatch)
+});
+
+export class CoreLayout extends React.Component {
   static propTypes = {
     children : React.PropTypes.element
   }
 
   constructor () {
     super();
+  }
+
+  componentDidMount(){
+    console.log(this.props);
   }
 
   render () {
@@ -28,7 +47,7 @@ export default class CoreLayout extends React.Component {
               <NavDropdown eventKey={5} title="John Smith" id="collapsible-navbar-dropdown">
                 <MenuItem eventKey="1">Account Settings</MenuItem>
                 <MenuItem divider />
-                <MenuItem eventKey="2">Sign Out</MenuItem>
+                <MenuItem eventKey="2" onClick={this.props.actions.loginToFacebook}>Sign Out</MenuItem>
               </NavDropdown>
             </Nav>
           </CollapsibleNav>
@@ -40,3 +59,5 @@ export default class CoreLayout extends React.Component {
     );
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(CoreLayout);
