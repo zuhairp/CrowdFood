@@ -80,7 +80,10 @@ export function loginFacebook() {
           else reject(response);
         }, {scope: 'email'});
       })
-      .then(response => dispatch(loginFacebookComplete(response)))
+      .then(response => {
+        dispatch(loginFacebookComplete(response));
+        dispatch(getUserInfo(response));
+      })
       .catch(error => dispatch(loginFacebookError(error)));
     }
   };
@@ -108,5 +111,43 @@ export function logoutFacebook() {
         FB.logout( () => resolve('dummy argument') );
     })
     .then(() => dispatch(logoutFacebookFinished()))
+  };
+}
+
+export const FACEBOOK_USER_INFO_REQUEST = 'FACEBOOK_USER_INFO_REQUEST';
+export const FACEBOOK_USER_INFO_RECEIVED = 'FACEBOOK_USER_INFO_RECEIVED';
+export const FACEBOOK_USER_INFO_ERROR = 'FACEBOOK_USER_INFO_ERROR';
+
+function facebookUserInfoRequested(userID) {
+  return {
+    type: FACEBOOK_USER_INFO_REQUEST,
+    payload: userID,
+  }
+}
+
+function facebookUserInfoReceived(payload) {
+  return {
+    type: FACEBOOK_USER_INFO_RECEIVED,
+    payload,
+  }
+}
+
+function facebookUserInfoError(error){
+  return {
+    type: FACEBOOK_USER_INFO_ERROR,
+    error,
+  }
+}
+
+export function getUserInfo(userID){
+  return (dispatch, getState) => {
+      dispatch(facebookUserInfoRequested());
+      return new Promise((resolve) => {
+        FB.api('/me', (response) => {
+          resolve(response); 
+        })
+      })
+      .then(response => dispatch(facebookUserInfoReceived(response)))
+      .catch(error => dispatch(facebookUserInfoError(error)));
   };
 }

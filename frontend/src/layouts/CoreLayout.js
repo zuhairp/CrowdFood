@@ -15,9 +15,22 @@ const actionCreators = {
   initializeFacebookSDK: facebookInit,
   logoutFacebook: logoutFacebook,
 };
-const mapStateToProps = (state) => ({
-  loggedInUser : state.loggedInUser
-});
+const mapStateToProps = (state) => {
+  let username = '';
+  const { loggedInUser } = state;
+  if(loggedInUser !== '') {
+    const user = state.users[loggedInUser];
+    if(user !== undefined && user.fetching){
+      username = 'Logging In...';
+    }
+    else if (user !== undefined){
+      username = user.name;
+    }
+  }
+  return {
+    loggedInUsername : username,
+  }
+};
 const mapDispatchToProps = (dispatch) => ({
   actions : bindActionCreators(actionCreators, dispatch)
 });
@@ -29,23 +42,27 @@ export class CoreLayout extends React.Component {
 
   constructor () {
     super();
-  }
+  ``}
 
   componentDidMount() {
     this.props.actions.initializeFacebookSDK();
   }
 
   renderUserStatus() {
-    const { loggedInUser } = this.props;
-    console.log(loggedInUser);
-    if(loggedInUser === ''){
+    const { loggedInUsername } = this.props;
+    if(loggedInUsername === ''){
       return (
         <NavItem eventKey={3} onClick={this.props.actions.loginToFacebook}>Log In</NavItem>
       );
     }
+    else if(loggedInUsername === 'Logging In...') {
+      return (
+        <NavItem eventKey={3}>Logging In...</NavItem>
+      );
+    }
     else {
       return (
-        <NavDropdown eventKey={5} title={ loggedInUser } id="collapsible-navbar-dropdown">
+        <NavDropdown eventKey={5} title={ loggedInUsername } id="collapsible-navbar-dropdown">
           <MenuItem eventKey="1">Account Settings</MenuItem>
           <MenuItem divider />
           <MenuItem eventKey="2" onClick={this.props.actions.logoutFacebook}>Sign Out</MenuItem>
