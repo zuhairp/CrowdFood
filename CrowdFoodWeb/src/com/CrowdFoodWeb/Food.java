@@ -1,9 +1,14 @@
 package com.CrowdFoodWeb;
 
 import java.util.*;
+import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Id;
 
-
+@Entity
 public class Food {
+	
+	
+	@Id private String id;
 	private String name;
 	private String description;
 	private String pictureURL;
@@ -12,7 +17,7 @@ public class Food {
 	private User chef;
 	private String paymentOption;
 	private String status;
-	private String id;
+	
 	private String location; //This will not be a string but will be a google maps location.
 						//Maybe it will be a GPS coordinate
 	
@@ -20,14 +25,15 @@ public class Food {
 	///Constructor
 	public Food(String name){
 		this.name = name;
-		
-		
 	}
 	
 	
 	////Getters and Setters
 	public String getName(){
 		return this.name;
+	}
+	public User getChef(){
+		return chef;
 	}
 
 	public String getDescription() {
@@ -40,6 +46,9 @@ public class Food {
 
 	public String getPictureURL() {
 		return pictureURL;
+	}
+	public String getId(){
+		return id;
 	}
 
 	public void setPictureURL(String pictureURL) {
@@ -81,6 +90,13 @@ public class Food {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public void setChef(User user){
+		this.chef = user;
+	}
+	public void setId(String id){
+		this.id = id;
+	}
+	
 	
 	
 	
