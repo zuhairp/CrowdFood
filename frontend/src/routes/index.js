@@ -1,8 +1,8 @@
 import React       from 'react';
 import { Route, IndexRoute }   from 'react-router';
 import CoreLayout  from 'layouts/CoreLayout';
-import HomeView    from 'containers/HomeView';
-import BuyFoodItemView from 'containers/BuyFoodItemView';
+import HomeView    from 'views/HomeView';
+import BuyFoodItemView from 'views/BuyFoodItemView';
 
 export default (
   <Route path='/' component={CoreLayout}>

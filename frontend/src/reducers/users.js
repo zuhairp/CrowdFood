@@ -1,11 +1,10 @@
-import { FOOD_RECEIVE } from 'actions/food';
-import { NEARBY_FOODS_RECEIVE } from 'actions/nearby_foods';
+import { FOOD_RECEIVE, NEARBY_FOODS_RECEIVE } from 'constants/food';
 import {
  FACEBOOK_LOGIN_RECEIVE, 
  FACEBOOK_LOGOUT_COMPLETE, 
  FACEBOOK_USER_INFO_RECEIVED, 
  FACEBOOK_USER_INFO_REQUEST 
-} from 'actions/facebook';
+} from 'constants/facebook';
 
 export function users(state = {}, action) {
   switch (action.type) {

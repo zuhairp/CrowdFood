@@ -1,11 +1,7 @@
 import {
   FOOD_REQUEST, FOOD_RECEIVE,
-} from 'actions/food';
-
-import {
   NEARBY_FOODS_REQUEST, NEARBY_FOODS_RECEIVE, NEARBY_FOODS_ERROR
-} from 'actions/nearby_foods';
-
+} from 'constants/food';
 
 function normalizeFood(food) {
   return {
