@@ -1,4 +1,4 @@
-import { FACEBOOK_INIT_START, FACEBOOK_INIT_COMPLETE } from 'actions/facebook';
+import { FACEBOOK_INIT_START, FACEBOOK_INIT_COMPLETE } from 'constants/facebook'
 
 export function facebookSDK(state = { status: '', }, action) {
   switch(action.type) {

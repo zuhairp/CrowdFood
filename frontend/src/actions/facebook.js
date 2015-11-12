@@ -1,5 +1,9 @@
-export const FACEBOOK_INIT_START = 'FACEBOOK_INIT_START';
-export const FACEBOOK_INIT_COMPLETE = 'FACEBOOK_INIT_COMPLETE';
+import {
+    FACEBOOK_INIT_START, FACEBOOK_INIT_COMPLETE,
+    FACEBOOK_LOGIN_REQUEST, FACEBOOK_LOGIN_RECEIVE, FACEBOOK_LOGIN_ERROR,
+    FACEBOOK_LOGOUT_REQUEST, FACEBOOK_LOGOUT_COMPLETE,
+    FACEBOOK_USER_INFO_REQUEST, FACEBOOK_USER_INFO_RECEIVED, FACEBOOK_USER_INFO_ERROR,
+} from 'constants/facebook';
 
 function facebookInitStarted() {
   return {
@@ -42,12 +46,6 @@ export function facebookInit() {
   }
 }
 
-
-export const FACEBOOK_LOGIN_REQUEST = 'FACEBOOK_LOGIN_REQUEST';
-export const FACEBOOK_LOGIN_RECEIVE = 'FACEBOOK_LOGIN_RECEIVE';
-export const FACEBOOK_LOGIN_ERROR   = 'FACEBOOK_LOGIN_ERROR';
-
-
 function loginFacebookStarted() {
   return {
     type: FACEBOOK_LOGIN_REQUEST,
@@ -89,8 +87,6 @@ export function loginFacebook() {
   };
 }
 
-export const FACEBOOK_LOGOUT_REQUEST = 'FACEBOOK_LOGOUT_REQUEST';
-export const FACEBOOK_LOGOUT_COMPLETE = 'FACEBOOK_LOGOUT_COMPLETE';
 
 function logoutFacebookStarted() {
   return {
@@ -113,10 +109,6 @@ export function logoutFacebook() {
     .then(() => dispatch(logoutFacebookFinished()))
   };
 }
-
-export const FACEBOOK_USER_INFO_REQUEST = 'FACEBOOK_USER_INFO_REQUEST';
-export const FACEBOOK_USER_INFO_RECEIVED = 'FACEBOOK_USER_INFO_RECEIVED';
-export const FACEBOOK_USER_INFO_ERROR = 'FACEBOOK_USER_INFO_ERROR';
 
 function facebookUserInfoRequested(userID) {
   return {

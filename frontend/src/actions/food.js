@@ -1,8 +1,6 @@
-import { EXAMPLE_FOODS, EXAMPLE_RESPONSE_TIME_MS } from 'utils/example_responses.js';
-
-export const FOOD_REQUEST = 'FOOD_REQUEST';
-export const FOOD_RECEIVE = 'FOOD_RECEIVE';
-export const FOOD_ERROR   = 'FOOD_ERROR';
+import {
+    FOOD_REQUEST, FOOD_RECEIVE, FOOD_ERROR,
+} from 'constants/food';
 
 function requestFood(foodId) {
   return {
