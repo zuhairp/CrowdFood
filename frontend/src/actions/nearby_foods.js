@@ -38,3 +38,4 @@ export function getNearbyFoods(location) { // eslint-disable-line no-unused-vars
     }
   };
 }
+
