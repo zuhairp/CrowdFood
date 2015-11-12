@@ -10,6 +10,9 @@ public class Food {
 	
 	@Id private String id;
 	private String name;
+	private double latitude;
+	
+	private double longtitude;
 	private String description;
 	private String pictureURL;
 	private Date postDate;
@@ -35,6 +38,24 @@ public class Food {
 	public User getChef(){
 		return chef;
 	}
+	public double getLatitude() {
+		return latitude;
+	}
+
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	public double getLongtitude() {
+		return longtitude;
+	}
+
+
+	public void setLongtitude(double longtitude) {
+		this.longtitude = longtitude;
+	}
+
 
 	public String getDescription() {
 		return description;
