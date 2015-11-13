@@ -49,3 +49,7 @@ export function loggedInUser(state = '', action) {
   } 
 }
 
+export function selectLoggedInUser(state) { 
+  return state.users[state.loggedInUser];
+}
+

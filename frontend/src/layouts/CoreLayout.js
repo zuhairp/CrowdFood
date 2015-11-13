@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect }            from 'react-redux';
 
 import { loginFacebook, logoutFacebook, facebookInit } from 'actions/facebook';
+import { selectLoggedInUser } from 'reducers/users';
 
 import 'styles/core.scss';
 
@@ -16,19 +17,8 @@ const actionCreators = {
   logoutFacebook: logoutFacebook,
 };
 const mapStateToProps = (state) => {
-  let username = '';
-  const { loggedInUser } = state;
-  if(loggedInUser !== '') {
-    const user = state.users[loggedInUser];
-    if(user !== undefined && user.fetching){
-      username = 'Logging In...';
-    }
-    else if (user !== undefined){
-      username = user.name;
-    }
-  }
   return {
-    loggedInUsername : username,
+    loggedInUser : selectLoggedInUser(state),
   }
 };
 const mapDispatchToProps = (dispatch) => ({
@@ -42,33 +32,34 @@ export class CoreLayout extends React.Component {
 
   constructor () {
     super();
-  ``}
+  }
 
   componentDidMount() {
     this.props.actions.initializeFacebookSDK();
   }
 
   renderUserStatus() {
-    const { loggedInUsername } = this.props;
-    if(loggedInUsername === ''){
+    const { loggedInUser } = this.props;
+    if(loggedInUser === undefined){
       return (
         <NavItem eventKey={3} onClick={this.props.actions.loginToFacebook}>Log In</NavItem>
       );
     }
-    else if(loggedInUsername === 'Logging In...') {
+
+    const { fetching } = loggedInUser;
+    if(fetching) {
       return (
         <NavItem eventKey={3}>Logging In...</NavItem>
       );
     }
-    else {
-      return (
-        <NavDropdown eventKey={5} title={ loggedInUsername } id="collapsible-navbar-dropdown">
+
+    return (
+        <NavDropdown eventKey={5} title={ loggedInUser.name } id="collapsible-navbar-dropdown">
           <MenuItem eventKey="1">Account Settings</MenuItem>
           <MenuItem divider />
           <MenuItem eventKey="2" onClick={this.props.actions.logoutFacebook}>Sign Out</MenuItem>
         </NavDropdown>
-      )
-    }
+    );
   }
 
   render() {
