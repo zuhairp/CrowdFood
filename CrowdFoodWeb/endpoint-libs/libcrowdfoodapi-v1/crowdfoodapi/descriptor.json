@@ -1,13 +1,13 @@
 {
   "files": [
     {
-      "downloadUrl": "/downloads/crowdfoodapi/v1/20151113000746/java/1.18.0-rc/crowdfood_1109_appspot_com-crowdfoodapi-v1-20151113000746-java-1.18.0-rc-sources.jar", 
-      "path": "crowdfood_1109_appspot_com-crowdfoodapi-v1-20151113000746-java-1.18.0-rc-sources.jar", 
+      "downloadUrl": "/downloads/crowdfoodapi/v1/20151115221938/java/1.18.0-rc/crowdfood_1109_appspot_com-crowdfoodapi-v1-20151115221938-java-1.18.0-rc-sources.jar", 
+      "path": "crowdfood_1109_appspot_com-crowdfoodapi-v1-20151115221938-java-1.18.0-rc-sources.jar", 
       "type": "source", 
-      "timestamp": "2015-11-13 00:07"
+      "timestamp": "2015-11-15 22:19"
     }, 
     {
-      "path": "crowdfood_1109_appspot_com-crowdfoodapi-v1-20151113000746-java-1.18.0-rc.jar.properties", 
+      "path": "crowdfood_1109_appspot_com-crowdfoodapi-v1-20151115221938-java-1.18.0-rc.jar.properties", 
       "type": "android.properties"
     }
   ], 
@@ -674,5 +674,5 @@
   "version": "v1", 
   "language_version": "1.18.0-rc", 
   "id": "crowdfoodapi:v1", 
-  "revision": 20151113000746
+  "revision": 20151115221938
 }

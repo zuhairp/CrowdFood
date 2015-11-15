@@ -1,8 +1,8 @@
 import { EXAMPLE_NEARBY_FOODS_RESPONSE, EXAMPLE_RESPONSE_TIME_MS } from 'utils/example_responses.js';
 
-export const NEARBY_FOODS_REQUEST = 'NEARBY_FOODS_REQUEST';
-export const NEARBY_FOODS_RECEIVE = 'NEARBY_FOODS_RECEIVE';
-export const NEARBY_FOODS_ERROR   = 'NEARBY_FOODS_ERROR';
+import {
+    NEARBY_FOODS_REQUEST, NEARBY_FOODS_RECEIVE, NEARBY_FOODS_ERROR,
+} from 'constants/food'
 
 function requestNearbyFoods() {
   return {
@@ -38,3 +38,4 @@ export function getNearbyFoods(location) { // eslint-disable-line no-unused-vars
     }
   };
 }
+

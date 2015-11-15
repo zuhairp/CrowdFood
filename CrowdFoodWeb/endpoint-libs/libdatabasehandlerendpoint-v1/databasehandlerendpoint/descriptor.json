@@ -1,13 +1,13 @@
 {
   "files": [
     {
-      "downloadUrl": "/downloads/databasehandlerendpoint/v1/20151113000748/java/1.18.0-rc/crowdfoodweb.com-databasehandlerendpoint-v1-20151113000748-java-1.18.0-rc-sources.jar", 
-      "path": "crowdfoodweb.com-databasehandlerendpoint-v1-20151113000748-java-1.18.0-rc-sources.jar", 
+      "downloadUrl": "/downloads/databasehandlerendpoint/v1/20151115221942/java/1.18.0-rc/crowdfoodweb.com-databasehandlerendpoint-v1-20151115221942-java-1.18.0-rc-sources.jar", 
+      "path": "crowdfoodweb.com-databasehandlerendpoint-v1-20151115221942-java-1.18.0-rc-sources.jar", 
       "type": "source", 
-      "timestamp": "2015-11-13 00:07"
+      "timestamp": "2015-11-15 22:19"
     }, 
     {
-      "path": "crowdfoodweb.com-databasehandlerendpoint-v1-20151113000748-java-1.18.0-rc.jar.properties", 
+      "path": "crowdfoodweb.com-databasehandlerendpoint-v1-20151115221942-java-1.18.0-rc.jar.properties", 
       "type": "android.properties"
     }
   ], 
@@ -674,5 +674,5 @@
   "version": "v1", 
   "language_version": "1.18.0-rc", 
   "id": "databasehandlerendpoint:v1", 
-  "revision": 20151113000748
+  "revision": 20151115221942
 }

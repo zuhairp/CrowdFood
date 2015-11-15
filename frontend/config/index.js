@@ -1,21 +1,25 @@
-process.env.NODE_ENV = (process.env.NODE_ENV || 'development').trim();
-
 import path     from 'path';
 import { argv } from 'yargs';
+import dotenv   from 'dotenv';
 
+dotenv.load();
 const config = new Map();
 
 // ------------------------------------
 // User Configuration
 // ------------------------------------
-// NOTE: Due to limitations with Webpack's custom require, which is used for
-// looking up all *.spec.js files, if you edit dir_src you must also edit
-// the path in ~/karma.entry.js.
 config.set('dir_src',  'src');
 config.set('dir_dist', 'dist');
+config.set('dir_test', 'tests');
 
-config.set('webpack_host',  'localhost');
-config.set('webpack_port', process.env.PORT || 3000);
+config.set('coverage_enabled', !argv.watch);
+config.set('coverage_reporters', [
+  { type : 'text-summary' },
+  { type : 'html', dir : 'coverage' }
+]);
+
+config.set('webpack_host',  '0.0.0.0');
+config.set('webpack_port',  process.env.PORT || 3000); // eslint-disable-line
 
 config.set('vendor_dependencies', [
   'history',
@@ -23,9 +27,7 @@ config.set('vendor_dependencies', [
   'react-redux',
   'react-router',
   'redux',
-  'redux-router',
-  'redux-devtools',
-  'redux-devtools/lib/react'
+  'redux-router'
 ]);
 
 /*  *********************************************
@@ -67,8 +69,8 @@ config.set('path_project', path.resolve(__dirname, '../'));
 // Utilities
 // ------------------------------------
 const paths = (() => {
-  const base    = [config.get('path_project')],
-        resolve = path.resolve;
+  const base    = [config.get('path_project')];
+  const resolve = path.resolve;
 
   const project = (...args) => resolve.apply(resolve, [...base, ...args]);
 
@@ -92,6 +94,6 @@ config.set('utils_aliases', [
   'styles',
   'utils',
   'views'
-].reduce((acc, x) => ((acc[x] = paths.src(x)) && acc), {}));
+].reduce((acc, dir) => ((acc[dir] = paths.src(dir)) && acc), {}));
 
 export default config;
