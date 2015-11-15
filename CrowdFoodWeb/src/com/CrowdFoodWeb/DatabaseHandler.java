@@ -8,6 +8,7 @@ import com.google.api.server.spi.response.NotFoundException;
 import javax.inject.Named;
 
 import com.googlecode.objectify.ObjectifyService;
+
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import com.googlecode.objectify.annotation.Entity;
@@ -25,6 +26,7 @@ public class DatabaseHandler {
 	@Id private String id;
 	
 	static {
+		ObjectifyService.register(Food.class);
         ObjectifyService.register(User.class);
     }
 	
@@ -40,6 +42,16 @@ public class DatabaseHandler {
 		this.token = user.token;	*/
 		// need to look up user in database and set him
 		ofy().save().entity(user).now();   // synchronous
+	}
+	
+	@ApiMethod
+	public Food retrieveFood(@Named("id") String id) { //GET from DB to frontend
+		return ofy().load().type(Food.class).id(id).get(); //return User
+	}
+	
+	@ApiMethod
+	public void insertFood(Food food) { //POST from frontend to DB
+		ofy().save().entity(food).now();   // synchronous
 	}
 
 }
