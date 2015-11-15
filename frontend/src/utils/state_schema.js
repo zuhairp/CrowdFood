@@ -12,6 +12,8 @@ state = {
 			quantity: 3,
 			price: 2.00,
 			distance: '0.1',
+
+			fetching: false,
 		},
 		6: {
 			id: 6,
@@ -23,6 +25,8 @@ state = {
 			quantity: 3,
 			price: 2.00,
 			distance: '0.2',
+
+			fetching: false,
 		},
 	},
 	users: {
@@ -47,4 +51,12 @@ state = {
 		fetching: false,
 	},
 	loggedInUser: '55508501',
+
+	facebookSdk : {
+		status: FACEBOOK_INIT_COMPLETE,	 // Constants are defined in actions/facebook.js
+	},
+
+	router : {
+		// injected by redux-router	
+	}
 }
