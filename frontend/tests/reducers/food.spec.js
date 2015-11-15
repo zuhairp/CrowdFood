@@ -1,11 +1,9 @@
 import {
   FOOD_REQUEST, FOOD_RECEIVE,
-  NEARBY_FOODS_REQUEST, NEARBY_FOODS_RECEIVE, NEARBY_FOODS_ERROR
+  NEARBY_FOODS_RECEIVE,
 } from 'constants/food';
 
-import { foods, nearbyFoods } from 'reducers/food';
-
-chai.config.truncateThreshold = 0;
+import { foods } from 'reducers/food';
 
 describe('Food Reducers and Selectors', function () {
   describe('(Reducer) foods', function () {
