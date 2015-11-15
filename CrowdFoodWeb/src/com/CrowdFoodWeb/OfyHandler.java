@@ -1,5 +1,3 @@
-//http://1-dot-guestbook-1057.appspot.com/.ofyguestbook.jsp
-
 package com.CrowdFoodWeb;
 
 import com.googlecode.objectify.ObjectifyService;
@@ -40,47 +38,22 @@ public class OfyHandler extends HttpServlet {
     }
 	
 	public void storeFood(HttpServletRequest req, HttpServletResponse resp, Food food) throws IOException {
-
-//        UserService userService = UserServiceFactory.getUserService();
-//
-//        User user = userService.getCurrentUser();
 		//WE need to use facebook user!
 
 		ofy().save().entity(food).now();
-
-        //resp.sendRedirect("/ofyguestbook.jsp");
-
     }
+	
 	public void storeUser(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
-	//    UserService userService = UserServiceFactory.getUserService();
-	//
-	//    User user = userService.getCurrentUser();
 		//WE need to use facebook user!
 	
-	
-	
-	    // We have one entity group per Guestbook with all Greetings residing
-	
-	    // in the same entity group as the Guestbook to which they belong.
-	
-	    // This lets us run a transactional ancestor query to retrieve all
-	
-	    // Greetings for a given Guestbook.  However, the write rate to each
-	
-	    // Guestbook should be limited to ~1/second.
-	
-	   
 	    String content = req.getParameter("content");
 	
-	    User user = new User("id");
-	    
+	    User user = new User("id");	    
 	    
 	    ofy().save().entity(user).now();
-	
-	    resp.sendRedirect("/ofyguestbook.jsp");
 
 	}
+	
 	public boolean userExists(String id){
 		boolean exists = false;
 		ObjectifyService.register(User.class);
@@ -94,6 +67,7 @@ public class OfyHandler extends HttpServlet {
 		
 		return exists;
 	}
+	
 	public User loadUser(String id){
 		User returnUser = null;
 		ObjectifyService.register(User.class);
@@ -107,6 +81,7 @@ public class OfyHandler extends HttpServlet {
 		
 		return returnUser;
 	}
+	
 	public Food loadFood(String id){
 		Food food = null;
 		ObjectifyService.register(Food.class);
