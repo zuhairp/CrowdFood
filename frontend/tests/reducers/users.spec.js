@@ -239,7 +239,7 @@ describe('Users Reducers and Selectors', function () {
     });
   });
 
-  describe('(Selctor) selectLoggedInUser', function () {
+  describe('(Selector) selectLoggedInUser', function () {
     it('should select the logged in user', function () {
       const state = {
         users: {
