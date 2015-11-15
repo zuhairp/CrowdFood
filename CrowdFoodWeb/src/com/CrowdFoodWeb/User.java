@@ -1,9 +1,10 @@
 package com.CrowdFoodWeb;
 
 //import com.google.appengine.api.users.User;
-
+import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
+@Entity
 public class User {
 	private Double Rating;
 	private String userName;

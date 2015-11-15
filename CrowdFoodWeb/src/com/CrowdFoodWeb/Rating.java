@@ -1,9 +1,14 @@
 package com.CrowdFoodWeb;
 
+import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Id;
+
+@Entity
 public class Rating {
 	Food food;
+	User seller;
 	Double quality;
-	String id;
+	@Id private String id;
 	String comment;
 	
 	
@@ -26,6 +31,9 @@ public class Rating {
 	}
 	public Food getFood() {
 		return food;
+	}
+	public User getSeller() {
+		return seller;
 	}
 	
 	

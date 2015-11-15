@@ -25,18 +25,23 @@ public class DatabaseHandler {
 	
 	@Id private String id;
 	
+	public Id getId() {
+		return null;		
+	}
+	
 	static {
 		ObjectifyService.register(Food.class);
         ObjectifyService.register(User.class);
+        ObjectifyService.register(Rating.class);
     }
 	
-	@ApiMethod
-	public User retrieveUser(@Named("id") String id) { //GET from DB to frontend
+	@ApiMethod(name="getUser", path="get_user", httpMethod=HttpMethod.GET)
+	public User getUser(@Named("id") String id) { //GET from DB to frontend
 		return ofy().load().type(User.class).id(id).get(); //return User
 	}
 	
-	@ApiMethod
-	public void insertUser(User user) { //POST from frontend to DB
+	@ApiMethod(name="postUser", path="post_user", httpMethod=HttpMethod.POST)
+	public void postUser(User user) { //POST from frontend to DB
 		/*this.id = user.id;
 		this.userName = user.userName;
 		this.token = user.token;	*/
@@ -44,14 +49,22 @@ public class DatabaseHandler {
 		ofy().save().entity(user).now();   // synchronous
 	}
 	
-	@ApiMethod
-	public Food retrieveFood(@Named("id") String id) { //GET from DB to frontend
+	@ApiMethod(name="getFood", path="get_food", httpMethod=HttpMethod.GET)
+	public Food getFood(@Named("id") String id) { //GET from DB to frontend
 		return ofy().load().type(Food.class).id(id).get(); //return User
 	}
 	
-	@ApiMethod
-	public void insertFood(Food food) { //POST from frontend to DB
+	@ApiMethod(name="postFood", path="post_food", httpMethod=HttpMethod.POST)
+	public void postFood(Food food) { //POST from frontend to DB
 		ofy().save().entity(food).now();   // synchronous
+	}
+	@ApiMethod(name="getRating", path="get_rating", httpMethod=HttpMethod.GET)
+	public Rating getRating(@Named("id") String id) { //GET from DB to frontend
+		return ofy().load().type(Rating.class).id(id).get(); //return User
+	}
+	@ApiMethod(name="postRating", path="post_rating", httpMethod=HttpMethod.POST)
+	public void postRating(Rating rating) { //GET from DB to frontend
+		ofy().save().entity(rating).now(); //return User
 	}
 
 }
