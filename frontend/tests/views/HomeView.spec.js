@@ -18,7 +18,7 @@ function shallowRenderWithProps (props = {}) {
   return shallowRender(<HomeView {...props} />);
 }
 
-describe('(View) Home', function () {
+describe.skip('(View) Home', function () {
   let _component, _rendered, _props, _spies;
 
   beforeEach(function () {
