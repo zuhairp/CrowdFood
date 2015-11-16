@@ -12,8 +12,8 @@ public class Rating {
 	String comment;
 	
 	
-	public Rating(String id){
-		this.id = id;
+	public Rating(){
+		
 	}
 	
 	/////Getters and setters

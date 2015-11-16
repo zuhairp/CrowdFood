@@ -164,6 +164,9 @@
         "id" : "User",
         "type" : "object",
         "properties" : {
+          "rating" : {
+            "type" : "number"
+          },
           "userName" : {
             "type" : "string"
           },
@@ -172,9 +175,6 @@
           },
           "id" : {
             "type" : "string"
-          },
-          "rating" : {
-            "type" : "number"
           }
         }
       },

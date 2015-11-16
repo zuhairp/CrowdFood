@@ -6,7 +6,7 @@ import com.googlecode.objectify.annotation.Id;
 
 @Entity
 public class User {
-	private Double Rating;
+	private Double rating;
 	private String userName;
 	private String paymentOption;
 	@Id private String id;
@@ -14,27 +14,29 @@ public class User {
 	private String token;
 	
 	////Constructor
-	
+	public User(){
+		
+	}
 	
 	public User(String id){
 		this.id = id;
 	}
 	
-	public User(String id, String name,
-			String token){ //Pass in ID from Facebook API - Should be a numeric string
+	public User(String id, String name, String token){ //Pass in ID from Facebook API - Should be a numeric string
 		this.id = id;
 		this.userName = name;
 		this.token = token;
 	}
 	
 	
+	
 	//////getters and Setters
 	public Double getRating() {
-		return Rating;
+		return rating;
 	}
 	
 	public void setRating(Double rating) {
-		Rating = rating;
+		rating = rating;
 	}
 	
 	public String getUserName() {
