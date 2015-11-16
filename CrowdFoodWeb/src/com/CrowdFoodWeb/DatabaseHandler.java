@@ -32,6 +32,7 @@ public class DatabaseHandler {
 	static {
 		ObjectifyService.register(Food.class);
         ObjectifyService.register(User.class);
+        ObjectifyService.register(Rating.class);
     }
 	
 	@ApiMethod(name="getUser", path="get_user", httpMethod=HttpMethod.GET)
@@ -56,6 +57,14 @@ public class DatabaseHandler {
 	@ApiMethod(name="postFood", path="post_food", httpMethod=HttpMethod.POST)
 	public void postFood(Food food) { //POST from frontend to DB
 		ofy().save().entity(food).now();   // synchronous
+	}
+	@ApiMethod(name="getRating", path="get_rating", httpMethod=HttpMethod.GET)
+	public Rating getRating(@Named("id") String id) { //GET from DB to frontend
+		return ofy().load().type(Rating.class).id(id).get(); //return User
+	}
+	@ApiMethod(name="postRating", path="post_rating", httpMethod=HttpMethod.POST)
+	public void postRating(Rating rating) { //GET from DB to frontend
+		ofy().save().entity(rating).now(); //return User
 	}
 
 }
