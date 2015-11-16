@@ -1,5 +1,7 @@
 package com.CrowdFoodWeb;
 
+import java.util.List;
+
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiMethod.HttpMethod;
@@ -36,7 +38,11 @@ public class DatabaseHandler {
 	
 	@ApiMethod(name="getUser", path="get_user", httpMethod=HttpMethod.GET)
 	public User getUser(@Named("id") String id) { //GET from DB to frontend
-		return ofy().load().type(User.class).id(id).get(); //return User
+		//User temp = ofy().load().type(User.class).id(id).get();
+		//System.out.println("String Id = " + temp.getId() + " and name is " + temp.getUserName());
+		//System.out.println("Token = " + temp.getToken() + " and payment is " + temp.getPaymentOption());
+		//return temp;
+		return ofy().load().type(User.class).id(id).get();
 	}
 	
 	@ApiMethod(name="postUser", path="post_user", httpMethod=HttpMethod.POST)
@@ -50,12 +56,17 @@ public class DatabaseHandler {
 	
 	@ApiMethod(name="getFood", path="get_food", httpMethod=HttpMethod.GET)
 	public Food getFood(@Named("id") String id) { //GET from DB to frontend
-		return ofy().load().type(Food.class).id(id).get(); //return User
+		return ofy().load().type(Food.class).id(id).get();
 	}
 	
 	@ApiMethod(name="postFood", path="post_food", httpMethod=HttpMethod.POST)
 	public void postFood(Food food) { //POST from frontend to DB
 		ofy().save().entity(food).now();   // synchronous
+	}
+	
+	@ApiMethod(name="allFood", path="all_food", httpMethod=HttpMethod.GET)
+	public List<Food> allFood() { //GET from DB to frontend
+		return ObjectifyService.ofy().load().type(Food.class).list();
 	}
 
 }

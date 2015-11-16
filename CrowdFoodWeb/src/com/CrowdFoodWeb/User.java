@@ -2,8 +2,10 @@ package com.CrowdFoodWeb;
 
 //import com.google.appengine.api.users.User;
 
+import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
+@Entity
 public class User {
 	private Double Rating;
 	private String userName;
@@ -13,7 +15,9 @@ public class User {
 	private String token;
 	
 	////Constructor
-	
+	public User() {
+		
+	}
 	
 	public User(String id){
 		this.id = id;
@@ -58,6 +62,10 @@ public class User {
 	
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	public String getToken() {
+		return token;
 	}
 	
 	/////Other functions

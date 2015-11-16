@@ -11,7 +11,6 @@ public class Food {
 	@Id private String id;
 	private String name;
 	private double latitude;
-	
 	private double longtitude;
 	private String description;
 	private String pictureURL;
@@ -26,10 +25,12 @@ public class Food {
 	
 	
 	///Constructor
+	public Food() {
+	}
+	
 	public Food(String name){
 		this.name = name;
 	}
-	
 	
 	////Getters and Setters
 	public String getName(){
