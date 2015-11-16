@@ -15,11 +15,6 @@ public class User {
 	
 	////Constructor
 	public User(){
-		
-	}
-	
-	public User(String id){
-		this.id = id;
 	}
 	
 	public User(String id, String name, String token){ //Pass in ID from Facebook API - Should be a numeric string
@@ -61,6 +56,10 @@ public class User {
 	
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	public String getToken() {
+		return token;
 	}
 	
 	/////Other functions
