@@ -48,6 +48,14 @@ public class DatabaseHandler {
 		//return temp;
 		return ofy().load().type(User.class).id(id).get();
 	}
+	@ApiMethod(name="getAllUsers", path="all_users", httpMethod=HttpMethod.GET)
+	public List<User> allUsers(){ //GET from DB to frontend
+		//User temp = ofy().load().type(User.class).id(id).get();
+		//System.out.println("String Id = " + temp.getId() + " and name is " + temp.getUserName());
+		//System.out.println("Token = " + temp.getToken() + " and payment is " + temp.getPaymentOption());
+		//return temp;
+		return ObjectifyService.ofy().load().type(User.class).list();
+	}
 	
 	@ApiMethod(name="postUser", path="post_user", httpMethod=HttpMethod.POST)
 	public void postUser(User user) { //POST from frontend to DB
