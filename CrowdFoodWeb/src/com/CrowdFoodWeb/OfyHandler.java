@@ -48,7 +48,7 @@ public class OfyHandler extends HttpServlet {
 	
 	    String content = req.getParameter("content");
 	
-	    User user = new User("id");	    
+	    User user = new User();	    
 	    
 	    ofy().save().entity(user).now();
 

@@ -40,21 +40,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "crowdfoodapi.allFood" : {
-      "path" : "all_food",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.CrowdFoodWeb.DatabaseHandler.allFood",
-      "request" : {
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "crowdfoodapi.postRating" : {
       "path" : "post_rating",
       "httpMethod" : "POST",
@@ -63,43 +48,6 @@
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
       "rosyMethod" : "com.CrowdFoodWeb.DatabaseHandler.postRating",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "empty"
-      }
-    },
-    "crowdfoodapi.getRating" : {
-      "path" : "get_rating",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.CrowdFoodWeb.DatabaseHandler.getRating",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "string",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "crowdfoodapi.postFood" : {
-      "path" : "post_food",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.CrowdFoodWeb.DatabaseHandler.postFood",
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
@@ -145,6 +93,58 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
+    "crowdfoodapi.postFood" : {
+      "path" : "post_food",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.CrowdFoodWeb.DatabaseHandler.postFood",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
+    "crowdfoodapi.getRating" : {
+      "path" : "get_rating",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.CrowdFoodWeb.DatabaseHandler.getRating",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "crowdfoodapi.allFood" : {
+      "path" : "all_food",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.CrowdFoodWeb.DatabaseHandler.allFood",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "crowdfoodapi.getUser" : {
       "path" : "get_user",
       "httpMethod" : "GET",
@@ -173,6 +173,24 @@
         "id" : "Id",
         "type" : "object",
         "properties" : {
+        }
+      },
+      "Rating" : {
+        "id" : "Rating",
+        "type" : "object",
+        "properties" : {
+          "food" : {
+            "$ref" : "Food"
+          },
+          "seller" : {
+            "$ref" : "User"
+          },
+          "quality" : {
+            "type" : "number"
+          },
+          "comment" : {
+            "type" : "string"
+          }
         }
       },
       "Food" : {
@@ -248,24 +266,6 @@
             }
           }
         }
-      },
-      "Rating" : {
-        "id" : "Rating",
-        "type" : "object",
-        "properties" : {
-          "food" : {
-            "$ref" : "Food"
-          },
-          "seller" : {
-            "$ref" : "User"
-          },
-          "quality" : {
-            "type" : "number"
-          },
-          "comment" : {
-            "type" : "string"
-          }
-        }
       }
     },
     "methods" : {
@@ -274,24 +274,9 @@
           "$ref" : "Id"
         }
       },
-      "com.CrowdFoodWeb.DatabaseHandler.allFood" : {
-        "response" : {
-          "$ref" : "FoodCollection"
-        }
-      },
       "com.CrowdFoodWeb.DatabaseHandler.postRating" : {
         "request" : {
           "$ref" : "Rating"
-        }
-      },
-      "com.CrowdFoodWeb.DatabaseHandler.getRating" : {
-        "response" : {
-          "$ref" : "Rating"
-        }
-      },
-      "com.CrowdFoodWeb.DatabaseHandler.postFood" : {
-        "request" : {
-          "$ref" : "Food"
         }
       },
       "com.CrowdFoodWeb.DatabaseHandler.postUser" : {
@@ -302,6 +287,21 @@
       "com.CrowdFoodWeb.DatabaseHandler.getFood" : {
         "response" : {
           "$ref" : "Food"
+        }
+      },
+      "com.CrowdFoodWeb.DatabaseHandler.postFood" : {
+        "request" : {
+          "$ref" : "Food"
+        }
+      },
+      "com.CrowdFoodWeb.DatabaseHandler.getRating" : {
+        "response" : {
+          "$ref" : "Rating"
+        }
+      },
+      "com.CrowdFoodWeb.DatabaseHandler.allFood" : {
+        "response" : {
+          "$ref" : "FoodCollection"
         }
       },
       "com.CrowdFoodWeb.DatabaseHandler.getUser" : {
