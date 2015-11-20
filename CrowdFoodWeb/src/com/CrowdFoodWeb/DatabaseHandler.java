@@ -16,6 +16,9 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
+//http://localhost:8888/_ah/api/crowdfoodapi/v1/
+
+
 @Api(
 		name = "crowdfoodapi",
 	    version = "v1",
