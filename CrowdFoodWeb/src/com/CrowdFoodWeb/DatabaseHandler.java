@@ -1,18 +1,15 @@
 package com.CrowdFoodWeb;
 
+import static com.googlecode.objectify.ObjectifyService.ofy;
+
 import java.util.List;
+
+import javax.inject.Named;
 
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiMethod.HttpMethod;
-import com.google.api.server.spi.response.NotFoundException;
-
-import javax.inject.Named;
-
 import com.googlecode.objectify.ObjectifyService;
-
-import static com.googlecode.objectify.ObjectifyService.ofy;
-
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
