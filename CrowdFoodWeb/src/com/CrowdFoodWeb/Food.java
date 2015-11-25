@@ -1,6 +1,7 @@
 package com.CrowdFoodWeb;
 
 import java.util.*;
+
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
@@ -16,7 +17,7 @@ public class Food {
 	private String pictureURL;
 	private Date postDate;
 	private Date expirationDate;
-	private User chef;
+	private String chef;
 	private String paymentOption;
 	private String status;
 	
@@ -33,7 +34,7 @@ public class Food {
 	public String getName(){
 		return this.name;
 	}
-	public User getChef(){
+	public String getChef(){
 		return chef;
 	}
 	public double getLatitude() {
@@ -110,7 +111,7 @@ public class Food {
 		this.name = name;
 	}
 	public void setChef(User user){
-		this.chef = user;
+		this.chef = user.getId();
 	}
 	public void setId(String id){
 		this.id = id;

@@ -227,7 +227,7 @@
             "format" : "date-time"
           },
           "chef" : {
-            "$ref" : "User"
+            "type" : "string"
           },
           "paymentOption" : {
             "type" : "string"
@@ -241,16 +241,16 @@
         "id" : "Rating",
         "type" : "object",
         "properties" : {
-          "food" : {
-            "$ref" : "Food"
-          },
           "seller" : {
-            "$ref" : "User"
+            "type" : "string"
           },
           "quality" : {
             "type" : "number"
           },
           "comment" : {
+            "type" : "string"
+          },
+          "food" : {
             "type" : "string"
           }
         }

@@ -5,8 +5,8 @@ import com.googlecode.objectify.annotation.Id;
 
 @Entity
 public class Rating {
-	Food food;
-	User seller;
+	String foodId;
+	String seller;
 	Double quality;
 	@Id private String id;
 	String comment;
@@ -29,10 +29,10 @@ public class Rating {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-	public Food getFood() {
-		return food;
+	public String getFood() {
+		return foodId;
 	}
-	public User getSeller() {
+	public String getSeller() {
 		return seller;
 	}
 	

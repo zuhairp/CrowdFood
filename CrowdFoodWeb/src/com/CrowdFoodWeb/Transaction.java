@@ -1,42 +1,52 @@
 package com.CrowdFoodWeb;
 
 public class Transaction {
-	private User buyer;
-	private User chef;
-	private Food food;
+	private String buyerID;
+	private String chefID;
+	private String foodID;
+	
 	private int quantity;
 	private int price;
 	private String status;
 	
-	private String id; // This should change to fb API default
+	private String id;
 	
 	public Transaction(){
 		
 	}
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 
 	///Getters and Setters
-	public User getBuyer() {
-		return buyer;
+	public String getBuyer() {
+		return buyerID;
 	}
 
 	public void setBuyer(User buyer) {
-		this.buyer = buyer;
+		this.buyerID = buyer.getId();
 	}
 
-	public User getChef() {
-		return chef;
+	public String getChef() {
+		return chefID;
 	}
 
 	public void setChef(User chef) {
-		this.chef = chef;
+		this.chefID = chef.getId();
 	}
 
-	public Food getFood() {
-		return food;
+	public String getFood() {
+		return foodID;
 	}
 
 	public void setFood(Food food) {
-		this.food = food;
+		this.foodID = food.getId();
 	}
 
 	public int getQuantity() {
@@ -54,6 +64,4 @@ public class Transaction {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	
 }
