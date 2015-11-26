@@ -61,22 +61,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "crowdfoodapi.postUser" : {
-      "path" : "post_user",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.CrowdFoodWeb.DatabaseHandler.postUser",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "empty"
-      }
-    },
     "crowdfoodapi.getFood" : {
       "path" : "get_food",
       "httpMethod" : "GET",
@@ -165,6 +149,22 @@
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
+    },
+    "crowdfoodapi.postUser" : {
+      "path" : "post_user",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.CrowdFoodWeb.DatabaseHandler.postUser",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "empty"
+      }
     }
   },
   "descriptor" : {
@@ -226,13 +226,13 @@
             "type" : "string",
             "format" : "date-time"
           },
-          "chef" : {
-            "type" : "string"
-          },
           "paymentOption" : {
             "type" : "string"
           },
           "status" : {
+            "type" : "string"
+          },
+          "chef" : {
             "type" : "string"
           }
         }
@@ -279,11 +279,6 @@
           "$ref" : "User"
         }
       },
-      "com.CrowdFoodWeb.DatabaseHandler.postUser" : {
-        "request" : {
-          "$ref" : "User"
-        }
-      },
       "com.CrowdFoodWeb.DatabaseHandler.getFood" : {
         "response" : {
           "$ref" : "Food"
@@ -307,6 +302,11 @@
       "com.CrowdFoodWeb.DatabaseHandler.allFood" : {
         "response" : {
           "$ref" : "FoodCollection"
+        }
+      },
+      "com.CrowdFoodWeb.DatabaseHandler.postUser" : {
+        "request" : {
+          "$ref" : "User"
         }
       }
     }

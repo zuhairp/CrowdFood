@@ -17,7 +17,7 @@ public class Food {
 	private String pictureURL;
 	private Date postDate;
 	private Date expirationDate;
-	private String chef;
+	private String chefId;
 	private String paymentOption;
 	private String status;
 	
@@ -35,7 +35,7 @@ public class Food {
 		return this.name;
 	}
 	public String getChef(){
-		return chef;
+		return chefId;
 	}
 	public double getLatitude() {
 		return latitude;
@@ -110,8 +110,8 @@ public class Food {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public void setChef(User user){
-		this.chef = user.getId();
+	public void setChef(String userID){
+		this.chefId = userID;
 	}
 	public void setId(String id){
 		this.id = id;
