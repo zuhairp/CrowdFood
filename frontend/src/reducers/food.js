@@ -1,6 +1,7 @@
 import {
   FOOD_REQUEST, FOOD_RECEIVE,
   NEARBY_FOODS_REQUEST, NEARBY_FOODS_RECEIVE, NEARBY_FOODS_ERROR,
+  FOOD_POSTED,
 } from 'constants/food';
 
 function normalizeFood (food) {
@@ -18,6 +19,7 @@ export function foods (state = {}, action) {
       [action.id] : {...state[action.id], fetching: true},
     };
   case FOOD_RECEIVE:
+  case FOOD_POSTED:
     const normalizedReceivedFood = normalizeFood(action.payload);
     normalizedReceivedFood.fetching = false;
     return {
