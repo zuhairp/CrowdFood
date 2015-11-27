@@ -1,16 +1,16 @@
 import {
   FOOD_REQUEST, FOOD_RECEIVE,
-  NEARBY_FOODS_REQUEST, NEARBY_FOODS_RECEIVE, NEARBY_FOODS_ERROR
+  NEARBY_FOODS_REQUEST, NEARBY_FOODS_RECEIVE, NEARBY_FOODS_ERROR,
 } from 'constants/food';
 
-function normalizeFood(food) {
+function normalizeFood (food) {
   return {
     ...food,
     owner: food.owner.id,
   };
 }
 
-export function foods(state = {}, action) {
+export function foods (state = {}, action) {
   switch (action.type) {
   case FOOD_REQUEST:
     return {
@@ -40,7 +40,7 @@ export function foods(state = {}, action) {
   }
 }
 
-export function nearbyFoods(state = {foods: [], fetching:false}, action) {
+export function nearbyFoods (state = {foods: [], fetching:false}, action) {
   switch (action.type) {
   case NEARBY_FOODS_REQUEST:
     return {
@@ -48,13 +48,13 @@ export function nearbyFoods(state = {foods: [], fetching:false}, action) {
       fetching: true,
     };
   case NEARBY_FOODS_RECEIVE:
-    const f = [];
+    const nearby = [];
     for (const food of action.payload) {
-      f.push(food.id);
+      nearby.push(food.id);
     }
     return {
       ...state,
-      foods: f,
+      foods: nearby,
       fetching: false,
     };
   case NEARBY_FOODS_ERROR:
