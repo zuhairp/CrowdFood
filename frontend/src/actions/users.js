@@ -33,7 +33,7 @@ export function getUser (userId) {
     const alreadyFetching = (user === undefined) ? false : user.fetching;
     if (!alreadyFetching) {
       dispatch(requestUser(userId));
-      const url = `https://endpoints-test-1109.appspot.com/_ah/api/crowdfoodapi/v1/get_user?id=${userId}`;
+      const url = `https://endpoints-test-1109.appspot.com/_ah/api/crowdfoodapi/v1/user/${userId}`;
       return fetch(url)
       .then(response => response.json())
       .then(json => dispatch(receivedUser(json)))

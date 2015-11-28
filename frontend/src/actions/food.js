@@ -32,7 +32,7 @@ export function getFood (foodId) {
     const alreadyFetching = (food === undefined) ? false : food.fetching;
     if (!alreadyFetching) {
       dispatch(requestFood(foodId));
-      const url = `https://endpoints-test-1109.appspot.com/_ah/api/crowdfoodapi/v1/get_food?id=${foodId}`;
+      const url = `https://endpoints-test-1109.appspot.com/_ah/api/crowdfoodapi/v1/food/${foodId}`;
       return fetch(url)
       .then(response => response.json())
       .then(json => dispatch(receivedFood(json)))
