@@ -21,6 +21,9 @@ public class Food {
 	private String paymentOption;
 	private String status;
 	
+	private double price;
+	private int quantity;
+	
 	private String location; //This will not be a string but will be a google maps location.
 						//Maybe it will be a GPS coordinate
 	
@@ -115,6 +118,22 @@ public class Food {
 	}
 	public void setId(String id){
 		this.id = id;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 	
 	

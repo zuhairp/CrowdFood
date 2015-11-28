@@ -232,6 +232,12 @@
           "status" : {
             "type" : "string"
           },
+          "price" : {
+            "type" : "number"
+          },
+          "quantity" : {
+            "type" : "integer"
+          },
           "chef" : {
             "type" : "string"
           }
