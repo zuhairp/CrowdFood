@@ -9,7 +9,7 @@ import com.googlecode.objectify.annotation.Id;
 public class Food {
 	
 	
-	@Id private String id;
+	@Id private Long id;
 	private String name;
 	private double latitude;
 	private double longtitude;
@@ -70,7 +70,7 @@ public class Food {
 	public String getPictureURL() {
 		return pictureURL;
 	}
-	public String getId(){
+	public Long getId(){
 		return id;
 	}
 
@@ -116,7 +116,7 @@ public class Food {
 	public void setChef(String userID){
 		this.chefId = userID;
 	}
-	public void setId(String id){
+	public void setId(Long id){
 		this.id = id;
 	}
 

@@ -8,7 +8,7 @@ public class Rating {
 	String foodId;
 	String seller;
 	Double quality;
-	@Id private String id;
+	@Id private long id;
 	String comment;
 	
 	

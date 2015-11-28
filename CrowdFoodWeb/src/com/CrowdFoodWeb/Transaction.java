@@ -1,25 +1,27 @@
 package com.CrowdFoodWeb;
 
+import com.googlecode.objectify.annotation.Id;
+
 public class Transaction {
 	private String buyerID;
 	private String chefID;
-	private String foodID;
+	private Long foodID;
 	
 	private int quantity;
 	private int price;
 	private String status;
 	
-	private String id;
+	@Id private long id;
 	
 	public Transaction(){
 		
 	}
 	
-	public String getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -41,7 +43,7 @@ public class Transaction {
 		this.chefID = chef.getId();
 	}
 
-	public String getFood() {
+	public long getFood() {
 		return foodID;
 	}
 

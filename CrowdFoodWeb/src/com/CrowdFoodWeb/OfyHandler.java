@@ -82,7 +82,7 @@ public class OfyHandler extends HttpServlet {
 		return returnUser;
 	}
 	
-	public Food loadFood(String id){
+	public Food loadFood(long id){
 		Food food = null;
 		ObjectifyService.register(Food.class);
 		List<Food> foods;
