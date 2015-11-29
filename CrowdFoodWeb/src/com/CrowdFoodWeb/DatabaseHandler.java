@@ -2,6 +2,7 @@ package com.CrowdFoodWeb;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Named;
@@ -41,43 +42,39 @@ public class DatabaseHandler {
     }
 	
 	@ApiMethod(name="getUser", path="user/{id}", httpMethod=HttpMethod.GET)
-	public User getUser(@Named("id") String id) throws NotFoundException { //GET from DB to frontend
-		try {
-			return ofy().load().type(User.class).id(id).safeGet();
-		} catch (com.googlecode.objectify.NotFoundException e){
-			throw new NotFoundException("Could not find User with ID: "+id);
-		}
+	public User getUser(@Named("id") String id) throws NotFoundException { //GET from DB to frontend		
+		checkIdExists(User.class, id);
+		return ofy().load().type(User.class).id(id).safeGet();
 	}
 	
 	@ApiMethod(name="postUser", path="user", httpMethod=HttpMethod.POST)
 	public User postUser(User user) { //POST from frontend to DB
-		/*this.id = user.id;
-		this.userName = user.userName;
-		this.token = user.token;	*/
-		// need to look up user in database and set him
 		Key<User> keyedUser = ofy().save().entity(user).now();   // synchronous
 		return ofy().load().key(keyedUser).safeGet();
 	}
 	
-	@ApiMethod(name="updateUser", path="user/{id}", httpMethod=HttpMethod.PUT)
-	public User updateUser(@Named("id") Long id, User user) throws NotFoundException{
-		try {
-			ofy().load().type(User.class).id(id).safeGet();
-			Key<User> keyedUser = ofy().save().entity(user).now();
-			return ofy().load().key(keyedUser).safeGet();
-		} catch (com.googlecode.objectify.NotFoundException e){
-			throw new NotFoundException("Could not find User with ID: "+id);
-		}
-	}
 	
 	@ApiMethod(name="getFood", path="food/{id}", httpMethod=HttpMethod.GET)
-	public Food getFood(@Named("id") String id) { //GET from DB to frontend
+	public Food getFood(@Named("id") Long id) throws NotFoundException { //GET from DB to frontend
+		checkIdExists(Food.class, id);
 		return ofy().load().type(Food.class).id(id).get();
 	}
 	
 	@ApiMethod(name="postFood", path="food", httpMethod=HttpMethod.POST)
-	public void postFood(Food food) { //POST from frontend to DB
-		ofy().save().entity(food).now();   // synchronous
+	public Food postFood(Food food) { //POST from frontend to DB
+		food.setPostDate(new Date());
+		Key<Food> keyedFood = ofy().save().entity(food).now();   // synchronous
+		return ofy().load().key(keyedFood).safeGet();
+	}
+	@ApiMethod(name="deleteFood", path="food/{id}", httpMethod=HttpMethod.DELETE)
+	public void removeFood(@Named("id") Long id) throws NotFoundException {
+		checkIdExists(Food.class, id);
+		ofy().delete().type(Food.class).id(id).now();
+	}
+	
+	@ApiMethod(name="allFood", path="all_food", httpMethod=HttpMethod.GET)
+	public List<Food> allFood() { //GET from DB to frontend
+		return ObjectifyService.ofy().load().type(Food.class).list();
 	}
 	
 	
@@ -90,9 +87,22 @@ public class DatabaseHandler {
 		ofy().save().entity(rating).now(); //return User
 	}
 	
-	@ApiMethod(name="allFood", path="all_food", httpMethod=HttpMethod.GET)
-	public List<Food> allFood() { //GET from DB to frontend
-		return ObjectifyService.ofy().load().type(Food.class).list();
+	
+	
+	
+	private void checkIdExists(Class<?> type, Long id) throws NotFoundException{
+		try {
+			ofy().load().type(type).id(id).safeGet();
+		} catch (com.googlecode.objectify.NotFoundException e){
+			throw new NotFoundException("Could not find " + type.getName() + " with ID: "+id);
+		}
+	}
+	private void checkIdExists(Class<?> type, String id) throws NotFoundException{
+		try {
+			ofy().load().type(type).id(id).safeGet();
+		} catch (com.googlecode.objectify.NotFoundException e){
+			throw new NotFoundException("Could not find " + type.getName() + " with ID: "+id);
+		}
 	}
 
 }
