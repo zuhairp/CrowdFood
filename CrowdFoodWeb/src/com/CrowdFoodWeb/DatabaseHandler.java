@@ -76,7 +76,47 @@ public class DatabaseHandler {
 	public List<Food> allFood() { //GET from DB to frontend
 		return ObjectifyService.ofy().load().type(Food.class).list();
 	}
-	
+	@ApiMethod(name="allTransactions", path="all_transactions", httpMethod=HttpMethod.GET)
+	public List<Transaction> allTransactions(User user) { //GET from DB to frontend
+		
+		 List<Transaction> all = ObjectifyService.ofy().load().type(Transaction.class).list();
+		 List<Transaction> userList;
+		 for(Transaction transaction: all){
+			 if(transaction.getBuyerId() == user.getId()){
+				 userList.add(transaction);
+			 }
+			 if(transaction.getChefId() == user.getId()){
+				 userList.add(transaction);
+			 }
+		 }
+		 
+		 return userList;
+	}
+	@ApiMethod(name="getTransaction", path="transaction/{id}", httpMethod=HttpMethod.GET)
+	public Food getTransaction(@Named("id") Long id) throws NotFoundException { //GET from DB to frontend
+		checkIdExists(Transaction.class, id);
+		
+		return ofy().load().type(Transaction.class).id(id).get();
+		
+	}
+	@ApiMethod(name="postTransaction", path="post_transaction", httpMethod=HttpMethod.POST)
+	public void postTransaction(Transaction transaction)throws NotFoundException { //GET from DB to frontend
+		ofy().save().entity(transaction).now(); //return User
+		long idtemp = transaction.getFoodId();
+		checkIdExists(Food.class, idtemp);
+		Food temp = ofy().load().type(Food.class).id(idtemp).get();
+		if(temp.getQuantity() > transaction.getQuantity()){
+			temp.setQuantity(temp.getQuantity() - transaction.getQuantity());
+			ofy().save().entity(temp).now();
+			
+		}
+		else if (temp.getQuantity() == transaction.getQuantity()){
+			ofy().delete().type(Food.class).id(idtemp).now();
+		}
+		else if(temp.getQuantity() < transaction.getQuantity()){
+			
+		}
+	}
 	
 	@ApiMethod(name="getRating", path="get_rating", httpMethod=HttpMethod.GET)
 	public Rating getRating(@Named("id") String id) { //GET from DB to frontend

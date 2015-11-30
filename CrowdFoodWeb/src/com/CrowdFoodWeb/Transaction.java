@@ -27,27 +27,27 @@ public class Transaction {
 
 
 	///Getters and Setters
-	public String getBuyer() {
+	public String getBuyerId() {
 		return buyerID;
 	}
 
-	public void setBuyer(User buyer) {
+	public void setBuyerId(User buyer) {
 		this.buyerID = buyer.getId();
 	}
 
-	public String getChef() {
+	public String getChefId() {
 		return chefID;
 	}
 
-	public void setChef(User chef) {
+	public void setChefId(User chef) {
 		this.chefID = chef.getId();
 	}
 
-	public long getFood() {
+	public long getFoodId() {
 		return foodID;
 	}
 
-	public void setFood(Food food) {
+	public void setFoodId(Food food) {
 		this.foodID = food.getId();
 	}
 

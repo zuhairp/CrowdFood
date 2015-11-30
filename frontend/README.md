@@ -5,7 +5,7 @@ React Redux Starter Kit
 [![Build Status](https://travis-ci.org/davezuko/react-redux-starter-kit.svg?branch=master)](https://travis-ci.org/davezuko/react-redux-starter-kit?branch=master)
 [![dependencies](https://david-dm.org/davezuko/react-redux-starter-kit.svg)](https://david-dm.org/davezuko/react-redux-starter-kit)
 
-Starter kit to get you up and running with a bunch of awesome new front-end technologies, all on top of a configurable, feature-rich webpack build system that's already setup to provide unit testing, coverage reporting, hot reloading, sass imports with CSS extraction, and a whole lot more. Check out the full feature list below!
+Starter kit to get you up and running with a bunch of awesome new front-end technologies, all on top of a configurable, feature-rich webpack build system that's already setup to provide hot reloading, sass imports with CSS extraction, unit testing, code coverage reports, bundle splitting, and a whole lot more. Check out the full feature list below!
 
 Redux, React-Router, and React are constantly releasing new API changes. If you'd like to help keep this boilerplate up to date, please contribute or create a new issue if you think this starter kit is missing something!
 
@@ -32,9 +32,9 @@ Features
 
 * [React](https://github.com/facebook/react) (`^0.14.0`)
   * Includes react-addons-test-utils (`^0.14.0`)
-* [React-Router](https://github.com/rackt/react-router) (`1.0.0-rc1`)
+* [React-Router](https://github.com/rackt/react-router) (`^1.0.0`)
 * [Redux](https://github.com/gaearon/redux) (`^3.0.0`)
-  * redux-router (`^1.0.0-beta3`)
+  * redux-simple-router (`^0.0.10`)
   * react-redux (`^4.0.0`)
   * redux-devtools
     * use `npm run dev:nw` to display in a separate window.
@@ -154,7 +154,7 @@ You can redefine which packages to treat as vendor dependencies by editing `vend
   'react',
   'react-redux',
   'react-router',
-  'redux-router',
+  'redux-simple-router',
   'redux'
 ]
 ```
@@ -178,6 +178,7 @@ layouts     => '~/src/layouts'
 reducers    => '~/src/reducers'
 routes      => '~/src/routes'
 services    => '~/src/services'
+store       => `~/src/store`
 styles      => '~/src/styles'
 utils       => '~/src/utils'
 views       => '~/src/views'
@@ -222,7 +223,7 @@ Here's an example:
 Testing
 -------
 
-To add a unit test, simply create `.spec.js` file anywhere in `~/tests`. Karma will pick up on these files automatically, and Mocha and Chai will be available within your test without the need to import them.
+To add a unit test, simply create a `.spec.js` file anywhere in `~/tests`. Karma will pick up on these files automatically, and Mocha and Chai will be available within your test without the need to import them.
 
 Coverage reports will be compiled to `~/coverage` by default. If you wish to change what reporters are used and where reports are compiled, you can do so by modifying `coverage_reporters` in `~/config/index.js`.
 
