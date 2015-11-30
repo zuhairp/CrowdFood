@@ -78,16 +78,16 @@ function postFoodError (error) {
 }
 
 export function sellFood (payload) {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch(postingFood(payload));
-    return new Promise((resolve, reject) => setTimeout(() => { // eslint-disable-line
-      payload.owner = {
-        id: payload.chef,
-        name: getState().users[payload.chef],
-      };
-      payload.id = Math.round(100000 * Math.random());
-      resolve(payload);
-    }, 10))
+    fetch('https://endpoints-test-1109.appspot.com/_ah/api/crowdfoodapi/v1/food/', {
+      method: 'post',
+      headers: {
+        'Content-Type' : 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
+    .then(request => request.json())
     .then(json => dispatch(postFood(json)))
     .catch(error => dispatch(postFoodError(error)));
   };

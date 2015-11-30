@@ -30,35 +30,37 @@ export class SellFoodItemView extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      // name: '',
-      // description: '',
-      // file: null,
-      // expirationDate: '',
-      // location: '',
-      name: 'Food',
-      description: 'Description',
+      name: '',
+      description: '',
       file: null,
-      expirationDate: '11/30',
-      location: '-100,34',
+      expirationDate: '',
+      location: '',
+      quantity: '',
+      price: '',
     };
   }
 
   submitForm () {
     const { loggedInUser } = this.props;
-    const { name, description, file, expirationDate, location } = this.state;
+    const { name, description, file, expirationDate, location, quantity, price } = this.state;
+
+    const [ latitude, longitude ] = location.split(',');
 
     const foodToSell = {
       name,
       description,
-      file,
-      expirationDate,
-      location,
+      // file,
+      // expirationDate,
+      latitude,
+      longitude,
+      quantity,
+      price,
       chef: loggedInUser.id,
     };
 
     const { postFood } = this.props.actions;
     postFood(foodToSell);
-    this.props.history.pushState('/');
+    this.props.history.pushState('/'); // eslint-disable-line
   }
 
   render () {
@@ -74,7 +76,7 @@ export class SellFoodItemView extends React.Component {
             <Input
               type='textarea'
               label='Description'
-              placeholder='Make it sound yummy!'
+              placeholder='Make it sound yummy! Also include ways to contact you as well as how big your serving sizes are'
               value={this.state.description}
               onChange={(event) => this.setState({description: event.target.value})}
             />
@@ -86,6 +88,21 @@ export class SellFoodItemView extends React.Component {
               placeholder='MM/DD'
               value={this.state.expirationDate}
               onChange={(event) => this.setState({expirationDate: event.target.value})}
+            />
+            <Input
+              type='text'
+              label='Quantity'
+              placeholder='How many servings are you selling?'
+              value={this.state.quantity}
+              onChange={(event) => this.setState({quantity: event.target.value })}
+            />
+            <Input
+              type='text'
+              label='Price per serving'
+              placeholder=''
+              addonBefore='$'
+              value={this.state.price}
+              onChange={(event) => this.setState({price: event.target.value })}
             />
             <Input
               type='text'

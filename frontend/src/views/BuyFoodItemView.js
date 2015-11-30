@@ -43,7 +43,7 @@ export class BuyFoodItemView extends React.Component {
   componentDidMount () {
     const { getFoodIfNecessary, getUser } = this.props.actions; // eslint-disable-line no-shadow
     getFoodIfNecessary(this.props.routerState.params.foodId) // eslint-disable-line
-    .then(action => { console.log(action); getUser(action.payload.chef); });
+    .then(action => getUser(action.payload.chef));
   }
 
   render () {
@@ -53,7 +53,7 @@ export class BuyFoodItemView extends React.Component {
       );
     }
     const { name, description, post_date : postDate, expiration_date : expirationDate, quantity, price } = this.props.food;
-    const { userName : seller, rating } = this.props.owner;
+    const { userName : seller } = this.props.owner;
     return (
       <div className='container text-center'>
         <Grid>
@@ -74,7 +74,7 @@ export class BuyFoodItemView extends React.Component {
                   { description }
           		</p>
           		<p>
-          			Prepared by Chef { seller } ({ rating } stars)
+          			Prepared by Chef { seller }
           		</p>
           		<p>
           			Post Date: { postDate }
