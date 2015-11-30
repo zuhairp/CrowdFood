@@ -29,7 +29,7 @@ function userError (id, error) {
 export function getUser (userId) {
   return (dispatch, getState) => {
     const state = getState();
-    const user = state.foods[userId];
+    const user = state.users[userId];
     const alreadyFetching = (user === undefined) ? false : user.fetching;
     if (!alreadyFetching) {
       dispatch(requestUser(userId));

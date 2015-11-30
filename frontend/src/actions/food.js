@@ -49,6 +49,6 @@ export function getFoodIfNecessary (foodId) {
     if (food === undefined) {
       return dispatch(getFood(foodId));
     }
-    return Promise.resolve();
+    return Promise.resolve({ payload: food });
   };
 }

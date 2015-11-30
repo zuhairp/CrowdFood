@@ -47,8 +47,12 @@ export function users (state = {}, action) {
   case NEARBY_FOODS_RECEIVE:
     const userMap = {};
     for (const food of action.payload) {
-      const { owner } = food;
-      userMap[owner.id] = owner;
+      const { chef } = food;
+      userMap[chef] = {
+        ...state[chef],
+        id: chef,
+        fetching: false,
+      };
     }
     return {
       ...state,
@@ -83,4 +87,3 @@ export function loggedInUser (state = '', action) {
 export function selectLoggedInUser (state) {
   return state.users[state.loggedInUser];
 }
-

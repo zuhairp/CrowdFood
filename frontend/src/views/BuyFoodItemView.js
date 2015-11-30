@@ -43,7 +43,7 @@ export class BuyFoodItemView extends React.Component {
   componentDidMount () {
     const { getFoodIfNecessary, getUser } = this.props.actions; // eslint-disable-line no-shadow
     getFoodIfNecessary(this.props.routerState.params.foodId) // eslint-disable-line
-    .then(action => getUser(action.payload.chef));
+    .then(action => { console.log(action); getUser(action.payload.chef); });
   }
 
   render () {
@@ -64,7 +64,7 @@ export class BuyFoodItemView extends React.Component {
           		</Row>
           		<Row>
                 {
-                  // <FoodOrderForm quantity={quantity} price={price} />
+                  <FoodOrderForm quantity={quantity} price={price} />
                 }
           		</Row>
           	</Col>
