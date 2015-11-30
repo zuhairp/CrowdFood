@@ -7,7 +7,7 @@ import {
 function normalizeFood (food) {
   return {
     ...food,
-    owner: food.owner.id,
+    chef: food.chef,
   };
 }
 

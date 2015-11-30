@@ -1,9 +1,10 @@
+import fetch from 'isomorphic-fetch';
+
 import {
     FOOD_REQUEST, FOOD_RECEIVE, FOOD_ERROR,
     FOOD_POSTING, FOOD_POSTED, FOOD_POST_ERROR,
 } from 'constants/food';
 
-import { EXAMPLE_FOODS, EXAMPLE_RESPONSE_TIME_MS } from 'utils/example_responses';
 
 function requestFood (foodId) {
   return {
@@ -19,10 +20,11 @@ function receivedFood (payload) {
   };
 }
 
-function foodError (error) {
+function foodError (id, error) {
   return {
     type: FOOD_ERROR,
     error,
+    id,
   };
 }
 
@@ -33,15 +35,13 @@ export function getFood (foodId) {
     const alreadyFetching = (food === undefined) ? false : food.fetching;
     if (!alreadyFetching) {
       dispatch(requestFood(foodId));
-
-      // Simulate a network request
-      return new Promise((resolve, reject) => setTimeout(() => {
-        const response = EXAMPLE_FOODS[foodId];
-        return (response === undefined) ? reject({error: { status: 404, message: 'Food does not exist'}}) : resolve(response);
-      }, EXAMPLE_RESPONSE_TIME_MS))
+      const url = `https://endpoints-test-1109.appspot.com/_ah/api/crowdfoodapi/v1/food/${foodId}`;
+      return fetch(url)
+      .then(response => response.json())
       .then(json => dispatch(receivedFood(json)))
       .catch(error => dispatch(foodError(error)));
     }
+    return Promise.resolve();
   };
 }
 
@@ -52,6 +52,7 @@ export function getFoodIfNecessary (foodId) {
     if (food === undefined) {
       return dispatch(getFood(foodId));
     }
+    return Promise.resolve({ payload: food });
   };
 }
 

@@ -1,39 +1,39 @@
-import { EXAMPLE_NEARBY_FOODS_RESPONSE, EXAMPLE_RESPONSE_TIME_MS } from 'utils/example_responses.js';
+import fetch from 'isomorphic-fetch';
 
 import {
     NEARBY_FOODS_REQUEST, NEARBY_FOODS_RECEIVE, NEARBY_FOODS_ERROR,
-} from 'constants/food'
+} from 'constants/food';
 
-function requestNearbyFoods() {
+function requestNearbyFoods () {
   return {
     type: NEARBY_FOODS_REQUEST,
   };
 }
 
-function receiveNearbyFoods(payload) {
+function receiveNearbyFoods (payload) {
   return {
     type: NEARBY_FOODS_RECEIVE,
     payload,
   };
 }
 
-function nearbyFoodsError(error) {
+function nearbyFoodsError (error) {
   return {
     type: NEARBY_FOODS_ERROR,
     error,
   };
 }
 
-export function getNearbyFoods(location) { // eslint-disable-line no-unused-vars
+export function getNearbyFoods (location) { // eslint-disable-line no-unused-vars
   return (dispatch, getState) => {
     const state = getState();
     const alreadyFetching = state.nearbyFoods.fetching;
     if (!alreadyFetching) {
       dispatch(requestNearbyFoods());
-      // Simulate a network request
-      return new Promise((resolve, reject) => setTimeout(() => resolve(EXAMPLE_NEARBY_FOODS_RESPONSE), EXAMPLE_RESPONSE_TIME_MS)) // eslint-disable-line no-unused-vars
-      .then(req => req.foods)
-      .then(json => dispatch(receiveNearbyFoods(json)))
+      return fetch(`https://endpoints-test-1109.appspot.com/_ah/api/crowdfoodapi/v1/all_food`)
+      .then(req => req.json())
+      .then(json => json.items)
+      .then(items => dispatch(receiveNearbyFoods(items)))
       .catch(error => dispatch(nearbyFoodsError(error)));
     }
   };
