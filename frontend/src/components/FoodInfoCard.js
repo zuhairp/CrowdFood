@@ -19,7 +19,6 @@ export default (props) => {
     <Col xs={12} sm={3}>
       <img src="http://placehold.it/100x100" />
       <p style={nameStyle} id={'food-info-' + index }><Link to={`/food/${id}`}>{ name }</Link></p>
-      <p style={distanceStyle}> { distance } mi</p>
     </Col>
   );
 };
