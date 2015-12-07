@@ -40,20 +40,13 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "crowdfoodapi.postRating" : {
-      "path" : "post_rating",
-      "httpMethod" : "POST",
     "crowdfoodapi.getUser" : {
-      "path" : "get_user",
+      "path" : "user/{id}",
       "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.CrowdFoodWeb.DatabaseHandler.postRating",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
       "rosyMethod" : "com.CrowdFoodWeb.DatabaseHandler.getUser",
       "request" : {
         "parameters" : {
@@ -65,27 +58,49 @@
         "body" : "empty"
       },
       "response" : {
-        "body" : "empty"
+        "body" : "autoTemplate(backendResponse)"
       }
     },
-    "crowdfoodapi.postUser" : {
-      "path" : "post_user",
+    "crowdfoodapi.updateTransaction" : {
+      "path" : "transaction/{id}",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.CrowdFoodWeb.DatabaseHandler.postUser",
+      "rosyMethod" : "com.CrowdFoodWeb.DatabaseHandler.updateTransactions",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "crowdfoodapi.postFood" : {
+      "path" : "food",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.CrowdFoodWeb.DatabaseHandler.postFood",
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
       },
       "response" : {
-        "body" : "empty"
+        "body" : "autoTemplate(backendResponse)"
       }
     },
     "crowdfoodapi.getFood" : {
-      "path" : "get_food",
+      "path" : "food/{id}",
       "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
@@ -95,7 +110,7 @@
       "request" : {
         "parameters" : {
           "id" : {
-            "type" : "string",
+            "type" : "int64",
             "required" : true
           }
         },
@@ -120,18 +135,72 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "crowdfoodapi.getRating" : {
-      "path" : "get_rating",
+    "crowdfoodapi.getTransaction" : {
+      "path" : "transaction/{id}",
       "httpMethod" : "GET",
-    "crowdfoodapi.postFood" : {
-      "path" : "post_food",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.CrowdFoodWeb.DatabaseHandler.getTransaction",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "crowdfoodapi.postTransaction" : {
+      "path" : "post_transaction",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.CrowdFoodWeb.DatabaseHandler.getRating",
-      "rosyMethod" : "com.CrowdFoodWeb.DatabaseHandler.postFood",
+      "rosyMethod" : "com.CrowdFoodWeb.DatabaseHandler.postTransaction",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "crowdfoodapi.deleteFood" : {
+      "path" : "food/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.CrowdFoodWeb.DatabaseHandler.removeFood",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
+    "crowdfoodapi.allTransactions" : {
+      "path" : "all_transactions",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.CrowdFoodWeb.DatabaseHandler.allTransactions",
       "request" : {
         "parameters" : {
           "id" : {
@@ -145,15 +214,37 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "crowdfoodapi.allFood" : {
-      "path" : "all_food",
+    "crowdfoodapi.postRating" : {
+      "path" : "post_rating",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.CrowdFoodWeb.DatabaseHandler.postRating",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
+    "crowdfoodapi.getRating" : {
+      "path" : "get_rating",
       "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.CrowdFoodWeb.DatabaseHandler.allFood",
+      "rosyMethod" : "com.CrowdFoodWeb.DatabaseHandler.getRating",
       "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
         "body" : "empty"
       },
       "response" : {
@@ -161,7 +252,7 @@
       }
     },
     "crowdfoodapi.postUser" : {
-      "path" : "post_user",
+      "path" : "user",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
@@ -173,7 +264,7 @@
         "bodyName" : "resource"
       },
       "response" : {
-        "body" : "empty"
+        "body" : "autoTemplate(backendResponse)"
       }
     }
   },
@@ -206,20 +297,28 @@
           }
         }
       },
-      "Rating" : {
-        "id" : "Rating",
+      "Transaction" : {
+        "id" : "Transaction",
         "type" : "object",
         "properties" : {
-          "food" : {
-            "$ref" : "Food"
+          "quantity" : {
+            "type" : "integer"
           },
-          "seller" : {
-            "$ref" : "User"
+          "status" : {
+            "type" : "string"
           },
-          "quality" : {
-            "type" : "number"
+          "id" : {
+            "type" : "string",
+            "format" : "int64"
           },
-          "comment" : {
+          "foodId" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "chefId" : {
+            "type" : "string"
+          },
+          "buyerId" : {
             "type" : "string"
           }
         }
@@ -229,7 +328,8 @@
         "type" : "object",
         "properties" : {
           "id" : {
-            "type" : "string"
+            "type" : "string",
+            "format" : "int64"
           },
           "name" : {
             "type" : "string"
@@ -254,13 +354,19 @@
             "type" : "string",
             "format" : "date-time"
           },
-          "chef" : {
-            "$ref" : "User"
-          },
           "paymentOption" : {
             "type" : "string"
           },
           "status" : {
+            "type" : "string"
+          },
+          "price" : {
+            "type" : "number"
+          },
+          "quantity" : {
+            "type" : "integer"
+          },
+          "chef" : {
             "type" : "string"
           }
         }
@@ -276,6 +382,36 @@
             }
           }
         }
+      },
+      "TransactionCollection" : {
+        "id" : "TransactionCollection",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Transaction"
+            }
+          }
+        }
+      },
+      "Rating" : {
+        "id" : "Rating",
+        "type" : "object",
+        "properties" : {
+          "seller" : {
+            "type" : "string"
+          },
+          "quality" : {
+            "type" : "number"
+          },
+          "comment" : {
+            "type" : "string"
+          },
+          "food" : {
+            "type" : "string"
+          }
+        }
       }
     },
     "methods" : {
@@ -289,14 +425,20 @@
           "$ref" : "User"
         }
       },
-      "com.CrowdFoodWeb.DatabaseHandler.postRating" : {
+      "com.CrowdFoodWeb.DatabaseHandler.updateTransactions" : {
         "request" : {
-          "$ref" : "Rating"
+          "$ref" : "Transaction"
+        },
+        "response" : {
+          "$ref" : "Transaction"
         }
       },
-      "com.CrowdFoodWeb.DatabaseHandler.postUser" : {
+      "com.CrowdFoodWeb.DatabaseHandler.postFood" : {
         "request" : {
-          "$ref" : "User"
+          "$ref" : "Food"
+        },
+        "response" : {
+          "$ref" : "Food"
         }
       },
       "com.CrowdFoodWeb.DatabaseHandler.getFood" : {
@@ -309,21 +451,41 @@
           "$ref" : "FoodCollection"
         }
       },
+      "com.CrowdFoodWeb.DatabaseHandler.getTransaction" : {
+        "response" : {
+          "$ref" : "Transaction"
+        }
+      },
+      "com.CrowdFoodWeb.DatabaseHandler.postTransaction" : {
+        "request" : {
+          "$ref" : "Transaction"
+        },
+        "response" : {
+          "$ref" : "Transaction"
+        }
+      },
+      "com.CrowdFoodWeb.DatabaseHandler.removeFood" : {
+      },
+      "com.CrowdFoodWeb.DatabaseHandler.allTransactions" : {
+        "response" : {
+          "$ref" : "TransactionCollection"
+        }
+      },
+      "com.CrowdFoodWeb.DatabaseHandler.postRating" : {
+        "request" : {
+          "$ref" : "Rating"
+        }
+      },
       "com.CrowdFoodWeb.DatabaseHandler.getRating" : {
         "response" : {
           "$ref" : "Rating"
-      "com.CrowdFoodWeb.DatabaseHandler.postFood" : {
-        "request" : {
-          "$ref" : "Food"
-        }
-      },
-      "com.CrowdFoodWeb.DatabaseHandler.allFood" : {
-        "response" : {
-          "$ref" : "FoodCollection"
         }
       },
       "com.CrowdFoodWeb.DatabaseHandler.postUser" : {
         "request" : {
+          "$ref" : "User"
+        },
+        "response" : {
           "$ref" : "User"
         }
       }

@@ -2,8 +2,10 @@ package com.CrowdFoodWeb;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.inject.Named;
 
@@ -13,7 +15,6 @@ import com.google.api.server.spi.config.ApiMethod.HttpMethod;
 import com.google.api.server.spi.response.NotFoundException;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.ObjectifyService;
-import com.googlecode.objectify.Result;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
@@ -31,6 +32,8 @@ public class DatabaseHandler {
 	
 	@Id private String id;
 	
+	Logger logger = Logger.getLogger(DatabaseHandler.class.getName());
+	
 	public Id getId() {
 		return null;		
 	}
@@ -39,6 +42,7 @@ public class DatabaseHandler {
 		ObjectifyService.register(Food.class);
         ObjectifyService.register(User.class);
         ObjectifyService.register(Rating.class);
+        ObjectifyService.register(Transaction.class);
     }
 	
 	@ApiMethod(name="getUser", path="user/{id}", httpMethod=HttpMethod.GET)
@@ -77,15 +81,15 @@ public class DatabaseHandler {
 		return ObjectifyService.ofy().load().type(Food.class).list();
 	}
 	@ApiMethod(name="allTransactions", path="all_transactions", httpMethod=HttpMethod.GET)
-	public List<Transaction> allTransactions(User user) { //GET from DB to frontend
-		
+	public List<Transaction> allTransactions(@Named("id") String id) { //GET from DB to frontend
 		 List<Transaction> all = ObjectifyService.ofy().load().type(Transaction.class).list();
-		 List<Transaction> userList;
+		 List<Transaction> userList = new ArrayList<Transaction>();
+		 
 		 for(Transaction transaction: all){
-			 if(transaction.getBuyerId() == user.getId()){
+			 if(transaction.getBuyerId().equals(id)){
 				 userList.add(transaction);
 			 }
-			 if(transaction.getChefId() == user.getId()){
+			 if(transaction.getChefId().equals(id)){
 				 userList.add(transaction);
 			 }
 		 }
@@ -93,29 +97,40 @@ public class DatabaseHandler {
 		 return userList;
 	}
 	@ApiMethod(name="getTransaction", path="transaction/{id}", httpMethod=HttpMethod.GET)
-	public Food getTransaction(@Named("id") Long id) throws NotFoundException { //GET from DB to frontend
+	public Transaction getTransaction(@Named("id") Long id) throws NotFoundException { //GET from DB to frontend
 		checkIdExists(Transaction.class, id);
-		
 		return ofy().load().type(Transaction.class).id(id).get();
 		
 	}
 	@ApiMethod(name="postTransaction", path="post_transaction", httpMethod=HttpMethod.POST)
-	public void postTransaction(Transaction transaction)throws NotFoundException { //GET from DB to frontend
-		ofy().save().entity(transaction).now(); //return User
+	public Transaction postTransaction(Transaction transaction)throws NotFoundException { //GET from DB to frontend		
+		Key<Transaction> keyedTransaction = ofy().save().entity(transaction).now();   // synchronous
+		
 		long idtemp = transaction.getFoodId();
 		checkIdExists(Food.class, idtemp);
+		
 		Food temp = ofy().load().type(Food.class).id(idtemp).get();
-		if(temp.getQuantity() > transaction.getQuantity()){
+		if(temp.getQuantity() >= transaction.getQuantity()){
 			temp.setQuantity(temp.getQuantity() - transaction.getQuantity());
 			ofy().save().entity(temp).now();
-			
 		}
-		else if (temp.getQuantity() == transaction.getQuantity()){
-			ofy().delete().type(Food.class).id(idtemp).now();
+		return ofy().load().key(keyedTransaction).safeGet();
+	}
+	
+	@ApiMethod(name="updateTransaction", path="transaction/{id}", httpMethod=HttpMethod.POST)
+	public Transaction updateTransactions(@Named("id") Long id, Transaction transaction) throws NotFoundException { //GET from DB to frontend		
+		checkIdExists(Transaction.class, id);
+		
+		Transaction existing = getTransaction(id);
+		if(existing.getStatus().equals("pending") && transaction.getStatus().equals("cancelled")){
+			Food foodToRefund = getFood(transaction.getFoodId());
+			int existingQuantity = foodToRefund.getQuantity();
+			foodToRefund.setQuantity(existingQuantity + transaction.getQuantity());
+			postFood(foodToRefund);
 		}
-		else if(temp.getQuantity() < transaction.getQuantity()){
-			
-		}
+		
+		Key<Transaction> keyedTransaction = ofy().save().entity(transaction).now();   // synchronous
+		return ofy().load().key(keyedTransaction).safeGet();
 	}
 	
 	@ApiMethod(name="getRating", path="get_rating", httpMethod=HttpMethod.GET)

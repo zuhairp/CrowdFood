@@ -11,6 +11,7 @@ public class CrowdFoodWebServlet extends HttpServlet {
 	static{
 		ObjectifyService.register(User.class);
 		ObjectifyService.register(Food.class);
+		ObjectifyService.register(Transaction.class);
 	}
 	
 	@Override

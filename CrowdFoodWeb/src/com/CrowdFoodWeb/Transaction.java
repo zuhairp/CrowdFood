@@ -1,7 +1,9 @@
 package com.CrowdFoodWeb;
 
+import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
+@Entity
 public class Transaction {
 	private String buyerID;
 	private String chefID;
@@ -9,9 +11,9 @@ public class Transaction {
 	
 	private int quantity;
 	private int price;
-	private String status;
+	private String status = "pending"; // "pending", "complete"
 	
-	@Id private long id;
+	@Id private Long id;
 	
 	public Transaction(){
 		
@@ -31,24 +33,24 @@ public class Transaction {
 		return buyerID;
 	}
 
-	public void setBuyerId(User buyer) {
-		this.buyerID = buyer.getId();
+	public void setBuyerId(String buyerId) {
+		this.buyerID = buyerId;
 	}
 
 	public String getChefId() {
 		return chefID;
 	}
 
-	public void setChefId(User chef) {
-		this.chefID = chef.getId();
+	public void setChefId(String chefId) {
+		this.chefID = chefId;
 	}
 
 	public long getFoodId() {
 		return foodID;
 	}
 
-	public void setFoodId(Food food) {
-		this.foodID = food.getId();
+	public void setFoodId(long foodId) {
+		this.foodID = foodId;
 	}
 
 	public int getQuantity() {

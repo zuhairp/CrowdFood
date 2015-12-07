@@ -34,6 +34,7 @@ public class OfyHandler extends HttpServlet {
 
         ObjectifyService.register(Food.class);
         ObjectifyService.register(User.class);
+        ObjectifyService.register(Transaction.class);
 
     }
 	
