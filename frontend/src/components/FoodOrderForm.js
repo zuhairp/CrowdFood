@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, Input } from 'react-bootstrap';
+import { Button, Input, Label } from 'react-bootstrap';
 
 export default class FoodOrderForm extends React.Component {
 
@@ -18,6 +18,7 @@ export default class FoodOrderForm extends React.Component {
 
   renderOptions() {
     const { quantity } = this.props;
+
     const quantityOptions = [];
     for (let i = 0; i < quantity; i++) {
       quantityOptions.push(
@@ -28,7 +29,10 @@ export default class FoodOrderForm extends React.Component {
   }
 
   render() {
-    const { price } = this.props;
+    const { quantity, price } = this.props;
+    if (quantity === 0) {
+      return <Label> Sold Out </Label>
+    }
 
     const parentContainerStyle = {
       display: 'flex',
